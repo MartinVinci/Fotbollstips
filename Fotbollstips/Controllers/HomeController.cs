@@ -10,6 +10,22 @@ namespace Fotbollstips.Controllers
     {
         public ActionResult Index()
         {
+            using (var db = new MartinDatabaseEntities())
+            {
+                var result = (from hits in db.TipsDatas
+                              select hits).ToList();
+
+                foreach (var item in result)
+                {
+                    ViewBag.Message = "Your application description page.";
+
+                    ViewBag.Hej = item.Email;
+                }
+
+            }
+
+
+
             return View();
         }
 
