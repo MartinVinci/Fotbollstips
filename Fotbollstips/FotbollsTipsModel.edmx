@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MartinDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MartinDatabase.dbo.TipsDatas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TipsDatas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Namn" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="HasPayed" Type="bit" />
+          <Property Name="Poäng" Type="int" />
+          <Property Name="Finallag1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Finallag2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vinnare" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sverige-Kamerun" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ryssland-Brasilien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kamerun-Brasilien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sverige-Ryssland" Type="nchar" MaxLength="10" />
+          <Property Name="EntryDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MartinDatabase.dbo.TipsErrors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TipsErrors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exception" Type="nvarchar(max)" />
+          <Property Name="InnerException" Type="nvarchar(max)" />
+          <Property Name="EntryDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MartinDatabase.dbo.TipsPathToPDFs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TipsPathToPDFs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipsData_SoftFK" Type="int" />
+          <Property Name="PathToPDF" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="MartinDatabaseModelStoreContainer">
+          <EntitySet Name="TipsDatas" EntityType="Self.TipsDatas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TipsDatas].[Id] AS [Id], 
+    [TipsDatas].[Namn] AS [Namn], 
+    [TipsDatas].[PhoneNumber] AS [PhoneNumber], 
+    [TipsDatas].[Email] AS [Email], 
+    [TipsDatas].[HasPayed] AS [HasPayed], 
+    [TipsDatas].[Poäng] AS [Poäng], 
+    [TipsDatas].[Finallag1] AS [Finallag1], 
+    [TipsDatas].[Finallag2] AS [Finallag2], 
+    [TipsDatas].[Vinnare] AS [Vinnare], 
+    [TipsDatas].[Sverige-Kamerun] AS [Sverige-Kamerun], 
+    [TipsDatas].[Ryssland-Brasilien] AS [Ryssland-Brasilien], 
+    [TipsDatas].[Kamerun-Brasilien] AS [Kamerun-Brasilien], 
+    [TipsDatas].[Sverige-Ryssland] AS [Sverige-Ryssland], 
+    [TipsDatas].[EntryDate] AS [EntryDate]
+    FROM [dbo].[TipsDatas] AS [TipsDatas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TipsErrors" EntityType="Self.TipsErrors" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TipsErrors].[Id] AS [Id], 
+    [TipsErrors].[Exception] AS [Exception], 
+    [TipsErrors].[InnerException] AS [InnerException], 
+    [TipsErrors].[EntryDate] AS [EntryDate]
+    FROM [dbo].[TipsErrors] AS [TipsErrors]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDFs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TipsPathToPDFs].[Id] AS [Id], 
+    [TipsPathToPDFs].[TipsData_SoftFK] AS [TipsData_SoftFK], 
+    [TipsPathToPDFs].[PathToPDF] AS [PathToPDF]
+    FROM [dbo].[TipsPathToPDFs] AS [TipsPathToPDFs]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MartinDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TipsData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Namn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasPayed" Type="Boolean" />
+          <Property Name="Poäng" Type="Int32" />
+          <Property Name="Finallag1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Finallag2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vinnare" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sverige_Kamerun" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ryssland_Brasilien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kamerun_Brasilien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sverige_Ryssland" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TipsError">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="TipsPathToPDF">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipsData_SoftFK" Type="Int32" />
+          <Property Name="PathToPDF" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="MartinDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TipsDatas" EntityType="Self.TipsData" />
+          <EntitySet Name="TipsErrors" EntityType="Self.TipsError" />
+          <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDF" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MartinDatabaseModelStoreContainer" CdmEntityContainer="MartinDatabaseEntities">
+          <EntitySetMapping Name="TipsDatas">
+            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsData">
+              <MappingFragment StoreEntitySet="TipsDatas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Namn" ColumnName="Namn" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HasPayed" ColumnName="HasPayed" />
+                <ScalarProperty Name="Poäng" ColumnName="Poäng" />
+                <ScalarProperty Name="Finallag1" ColumnName="Finallag1" />
+                <ScalarProperty Name="Finallag2" ColumnName="Finallag2" />
+                <ScalarProperty Name="Vinnare" ColumnName="Vinnare" />
+                <ScalarProperty Name="Sverige_Kamerun" ColumnName="Sverige-Kamerun" />
+                <ScalarProperty Name="Ryssland_Brasilien" ColumnName="Ryssland-Brasilien" />
+                <ScalarProperty Name="Kamerun_Brasilien" ColumnName="Kamerun-Brasilien" />
+                <ScalarProperty Name="Sverige_Ryssland" ColumnName="Sverige-Ryssland" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipsErrors">
+            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsError">
+              <MappingFragment StoreEntitySet="TipsErrors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="InnerException" ColumnName="InnerException" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipsPathToPDFs">
+            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsPathToPDF">
+              <MappingFragment StoreEntitySet="TipsPathToPDFs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TipsData_SoftFK" ColumnName="TipsData_SoftFK" />
+                <ScalarProperty Name="PathToPDF" ColumnName="PathToPDF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
