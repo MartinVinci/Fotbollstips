@@ -42,5 +42,15 @@ namespace Fotbollstips.Controllers
 
             return View();
         }
+
+        public ActionResult Participate()
+        {
+            return View();
+        }
+        public ActionResult ParticipateTest()
+        {
+            return View();
+        }
+
     }
 }
