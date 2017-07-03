@@ -1,12 +1,95 @@
-﻿@{
+﻿@model List<Fotbollstips.TipsData>
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <p>Lite text</p>
     @*<h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>
+                Namn
+            </th>
+            <th>
+                Poäng
+            </th>
+            <th>
+                Finallag 1
+            </th>
+            <th>
+                Finallag 2
+            </th>
+            <th>
+                Vinnare finalen
+            </th>
+            <th>
+                Sve-Kam
+            </th>
+            <th>
+                Rys-Bra
+            </th>
+            <th>
+                Kam-Bra
+            </th>
+            <th>
+                Sve-Rys
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            List<string> correctTeams = new List<string>();
+
+            correctTeams.Add(Model[0].Finallag1);
+            correctTeams.Add(Model[0].Finallag2);
+
+            var final1 = (correctTeams.Any(item.Finallag1.Contains)) ? "color:#00D600" : "";
+            var final2 = (correctTeams.Any(item.Finallag2.Contains)) ? "color:#00D600" : "";
+
+            var vinnare = (item.Vinnare == Model[0].Vinnare) ? "color:#00D600" : "";
+
+            var sveKam = (item.Sverige_Kamerun == Model[0].Sverige_Kamerun) ? "color:#00D600" : "";
+            var rysBra = (item.Ryssland_Brasilien == Model[0].Ryssland_Brasilien) ? "color:#00D600" : "";
+            var kamBra = (item.Kamerun_Brasilien == Model[0].Kamerun_Brasilien) ? "color:#00D600" : "";
+            var sveRys = (item.Sverige_Ryssland == Model[0].Sverige_Ryssland) ? "color:#00D600" : "";
+
+            <tr>
+                <td>
+                    @item.Namn
+                </td>
+                <td>
+                    @item.Poäng
+                </td>
+                <td style="@final1">
+                    @item.Finallag1
+                </td>
+                <td style="@final2">
+                    @item.Finallag2
+                </td>
+                <td style="@vinnare">
+                    @item.Vinnare
+                </td>
+                <td style="@sveKam">
+                    @item.Sverige_Kamerun
+                </td>
+                <td style="@rysBra">
+                    @item.Ryssland_Brasilien
+                </td>
+                <td style="@kamBra">
+                    @item.Kamerun_Brasilien
+                </td>
+                <td style="@sveRys">
+                    @item.Sverige_Ryssland
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 
 
@@ -17,26 +100,25 @@
 
 
 
-
 @*<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started Robin</h2>
-        <p>@ViewBag.Hej</p>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@
+        <div class="col-md-4">
+            <h2>Getting started Robin</h2>
+            <p>@ViewBag.Hej</p>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@

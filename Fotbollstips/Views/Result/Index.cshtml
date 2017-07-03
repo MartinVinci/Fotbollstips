@@ -1,0 +1,86 @@
+﻿@model Fotbollstips.TipsData
+
+@{
+    ViewBag.Title = "Resultat";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Resultat : @ViewBag.Number</h2>
+
+<div>
+    @using (Html.BeginForm("Index", "Result", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <th>
+                    Namn
+                </th>
+                <th>
+                    Poäng
+                </th>
+                <th>
+                    Finallag 1
+                </th>
+                <th>
+                    Finallag 2
+                </th>
+                <th>
+                    Vinnare finalen
+                </th>
+                <th>
+                    Sve-Kam
+                </th>
+                <th>
+                    Rys-Bra
+                </th>
+                <th>
+                    Kam-Bra
+                </th>
+                <th>
+                    Sve-Rys
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Model.Namn
+                </td>
+                <td>
+                    @Model.Poäng
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Finallag1)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Finallag2)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Vinnare)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Sverige_Kamerun)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Ryssland_Brasilien)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Kamerun_Brasilien)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Sverige_Ryssland)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Spara" />
+                </td>
+            </tr>
+
+
+
+        </table>
+    }
+
+
+
+
+</div>

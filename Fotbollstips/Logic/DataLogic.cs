@@ -10,12 +10,12 @@ namespace Fotbollstips.Logic
     {
         public static string RATT_SVAR = "Rätt svar";
 
-        public static List<TipsDataDisplay> GetDataForPresentation()
+        public static List<TipsData> GetDataForPresentation()
         {
             try
             {
                 // Get raw data
-                List<TipsData> rawData = GetEmTipsRawData();
+                List<TipsData> rawData = GetTipsRawData();
 
                 // Calculate points
                 List<TipsData> calculatedPoints = CalculatePoints(rawData);
@@ -24,14 +24,7 @@ namespace Fotbollstips.Logic
                 List<TipsData> sortedList = calculatedPoints.OrderByDescending(o => o.Poäng).ToList();
 
                 // Manipulate text string 
-                List<TipsData> manipulatedTextList = ManipulateTextStrings(sortedList);
-
-                List<TipsDataDisplay> returnList = new List<TipsDataDisplay>();
-
-                foreach (var item in manipulatedTextList)
-                {
-                    returnList.Add(new TipsDataDisplay(item));
-                }
+                List<TipsData> returnList = ManipulateTextStrings(sortedList);
 
                 return returnList;
             }
@@ -53,7 +46,7 @@ namespace Fotbollstips.Logic
             }
         }
 
-        private static List<TipsData> GetEmTipsRawData()
+        private static List<TipsData> GetTipsRawData()
         {
             using (var db = new MartinDatabaseEntities())
             {
@@ -64,9 +57,9 @@ namespace Fotbollstips.Logic
             }
         }
 
-        private static TipsData GetRattSvarEntity()
+        public static TipsData GetRattSvarEntity()
         {
-            var result = GetEmTipsRawData();
+            var result = GetTipsRawData();
 
             var output = (from hits in result
                           where hits.Namn == RATT_SVAR
@@ -115,8 +108,6 @@ namespace Fotbollstips.Logic
                 if (CompareFinal(item.Vinnare, correct.Vinnare))
                     points++;
 
-
-
                 #endregion
 
                 item.Poäng = points;
@@ -152,6 +143,28 @@ namespace Fotbollstips.Logic
             }
 
             return data;
+        }
+
+        public static bool SaveCorrectAnswers(TipsData model)
+        {
+            using (var db = new MartinDatabaseEntities())
+            {
+                var result = (from hits in db.TipsDatas
+                              where hits.Namn == DataLogic.RATT_SVAR
+                              select hits).FirstOrDefault();
+
+                result.Finallag1 = model.Finallag1;
+                result.Finallag2 = model.Finallag2;
+                result.Vinnare = model.Vinnare;
+                result.Sverige_Kamerun = model.Sverige_Kamerun;
+                result.Ryssland_Brasilien = model.Ryssland_Brasilien;
+                result.Kamerun_Brasilien = model.Kamerun_Brasilien;
+                result.Sverige_Ryssland = model.Sverige_Ryssland;
+
+                db.SaveChanges();
+            }
+
+            return true;
         }
     }
 }

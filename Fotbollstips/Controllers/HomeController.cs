@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fotbollstips.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,23 +11,14 @@ namespace Fotbollstips.Controllers
     {
         public ActionResult Index()
         {
-            using (var db = new MartinDatabaseEntities())
-            {
-                var result = (from hits in db.TipsDatas
-                              select hits).ToList();
+            ViewBag.Message = "Your application description page.";
 
-                foreach (var item in result)
-                {
-                    ViewBag.Message = "Your application description page.";
+            //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            List<TipsData> tipsData = DataLogic.GetDataForPresentation();
 
-                    ViewBag.Hej = item.Email;
-                }
+            //tipsData = new List<TipsData>();
 
-            }
-
-
-
-            return View();
+            return View(tipsData.ToList());
         }
 
         public ActionResult About()
@@ -45,12 +37,10 @@ namespace Fotbollstips.Controllers
 
         public ActionResult Participate()
         {
+            //TODO Så att man kan lämna in rad
             return View();
         }
-        public ActionResult ParticipateTest()
-        {
-            return View();
-        }
+      
 
     }
 }

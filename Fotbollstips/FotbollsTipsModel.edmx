@@ -4,9 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MartinDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MartinDatabase.dbo.TipsDatas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="MartinDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TipsDatas">
           <Key>
             <PropertyRef Name="Id" />
@@ -26,8 +24,6 @@ warning 6002: The table/view 'MartinDatabase.dbo.TipsDatas' does not have a prim
           <Property Name="Sverige-Ryssland" Type="nchar" MaxLength="10" />
           <Property Name="EntryDate" Type="datetime2" Precision="7" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MartinDatabase.dbo.TipsErrors' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TipsErrors">
           <Key>
             <PropertyRef Name="Id" />
@@ -37,8 +33,6 @@ warning 6002: The table/view 'MartinDatabase.dbo.TipsErrors' does not have a pri
           <Property Name="InnerException" Type="nvarchar(max)" />
           <Property Name="EntryDate" Type="datetime2" Precision="7" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MartinDatabase.dbo.TipsPathToPDFs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TipsPathToPDFs">
           <Key>
             <PropertyRef Name="Id" />
@@ -48,42 +42,11 @@ warning 6002: The table/view 'MartinDatabase.dbo.TipsPathToPDFs' does not have a
           <Property Name="PathToPDF" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="MartinDatabaseModelStoreContainer">
-          <EntitySet Name="TipsDatas" EntityType="Self.TipsDatas" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TipsDatas].[Id] AS [Id], 
-    [TipsDatas].[Namn] AS [Namn], 
-    [TipsDatas].[PhoneNumber] AS [PhoneNumber], 
-    [TipsDatas].[Email] AS [Email], 
-    [TipsDatas].[HasPayed] AS [HasPayed], 
-    [TipsDatas].[Poäng] AS [Poäng], 
-    [TipsDatas].[Finallag1] AS [Finallag1], 
-    [TipsDatas].[Finallag2] AS [Finallag2], 
-    [TipsDatas].[Vinnare] AS [Vinnare], 
-    [TipsDatas].[Sverige-Kamerun] AS [Sverige-Kamerun], 
-    [TipsDatas].[Ryssland-Brasilien] AS [Ryssland-Brasilien], 
-    [TipsDatas].[Kamerun-Brasilien] AS [Kamerun-Brasilien], 
-    [TipsDatas].[Sverige-Ryssland] AS [Sverige-Ryssland], 
-    [TipsDatas].[EntryDate] AS [EntryDate]
-    FROM [dbo].[TipsDatas] AS [TipsDatas]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TipsErrors" EntityType="Self.TipsErrors" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TipsErrors].[Id] AS [Id], 
-    [TipsErrors].[Exception] AS [Exception], 
-    [TipsErrors].[InnerException] AS [InnerException], 
-    [TipsErrors].[EntryDate] AS [EntryDate]
-    FROM [dbo].[TipsErrors] AS [TipsErrors]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDFs" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TipsPathToPDFs].[Id] AS [Id], 
-    [TipsPathToPDFs].[TipsData_SoftFK] AS [TipsData_SoftFK], 
-    [TipsPathToPDFs].[PathToPDF] AS [PathToPDF]
-    FROM [dbo].[TipsPathToPDFs] AS [TipsPathToPDFs]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="TipsDatas" EntityType="Self.TipsDatas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipsErrors" EntityType="Self.TipsErrors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDFs" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MartinDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

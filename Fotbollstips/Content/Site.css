@@ -22,3 +22,30 @@ select,
 textarea {
     max-width: 280px;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    text-align: center;
+    border: none 0px;
+    padding: 5px;
+}
+
+tr {
+    padding: 3px;
+}
+
+td {
+    padding: 3px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dcdada;
+}
+
+table, th, td, tr {
+    border: 1px solid black;
+}
