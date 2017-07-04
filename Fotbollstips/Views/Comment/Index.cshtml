@@ -1,0 +1,46 @@
+﻿
+@*@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>*@
+
+@model List<Fotbollstips.TipsComment>
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+<h2>Comments</h2>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            EntryDate
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Name;
+            </td>
+            <td>
+                @item.Comment;
+            </td>
+            <td>
+                @item.EntryDate.ToString();
+            </td>
+        </tr>
+    }
+
+</table>

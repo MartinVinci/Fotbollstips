@@ -40,7 +40,18 @@ namespace Fotbollstips.Controllers
             //TODO Så att man kan lämna in rad
             return View();
         }
-      
 
+        public ActionResult Comment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Comment(TipsComment model)
+        {
+            var success = DataLogic.SaveComment(model);
+
+            return View();
+        }
     }
 }

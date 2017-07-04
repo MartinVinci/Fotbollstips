@@ -49,3 +49,9 @@ tr:nth-child(even) {
 table, th, td, tr {
     border: 1px solid black;
 }
+
+.wide
+{
+     width: 300px;
+     color: blue;
+}

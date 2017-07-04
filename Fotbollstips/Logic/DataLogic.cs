@@ -166,5 +166,45 @@ namespace Fotbollstips.Logic
 
             return true;
         }
+
+        public static List<TipsError> GetErrors()
+        {
+            using (var db = new MartinDatabaseEntities())
+            {
+                var result = (from hits in db.TipsErrors
+                              select hits).ToList();
+
+                return result;
+            }
+        }
+
+        public static List<TipsComment> GetComments()
+        {
+            using (var db = new MartinDatabaseEntities())
+            {
+                var result = (from hits in db.TipsComments
+                              select hits).ToList();
+
+                return result;
+            }
+        }
+
+        public static bool SaveComment(TipsComment model)
+        {
+            using (var db = new MartinDatabaseEntities())
+            {
+                var comment = new TipsComment()
+                {
+                    Name = model.Name,
+                    Comment = model.Comment,
+                    EntryDate = DateTime.UtcNow
+                };
+
+                db.TipsComments.Add(comment);
+                db.SaveChanges();
+            }
+
+            return true;
+        }
     }
 }

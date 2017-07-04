@@ -1,0 +1,33 @@
+﻿@model Fotbollstips.TipsComment
+
+@{
+    ViewBag.Title = "Ge en kommentar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <p>Är något oklart, vill du fråga något, ge beröm eller bara säga hej?</p>
+    <p> Skicka gärna in en kommentar!</p>
+
+</div>
+<div>
+    @using (Html.BeginForm("Comment", "Home", FormMethod.Post))
+    {
+        <p>Ditt namn</p>
+        @Html.TextBoxFor(m => m.Name)
+        <br />
+        <br />
+        <p>Din kommentar</p>
+        @*@Html.TextBoxFor(m => m.Comment)*@
+        @Html.TextAreaFor(m => m.Comment, new { style = "width:300px; height:100px" })
+
+        <br />
+        <br />
+        <input type="submit" value="Skicka in kommentar" />
+        
+    }
+
+
+
+
+</div>

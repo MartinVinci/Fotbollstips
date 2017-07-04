@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MartinDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TipsComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="EntryDate" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="TipsDatas">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,6 +51,7 @@
           <Property Name="PathToPDF" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="MartinDatabaseModelStoreContainer">
+          <EntitySet Name="TipsComments" EntityType="Self.TipsComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipsDatas" EntityType="Self.TipsDatas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipsErrors" EntityType="Self.TipsErrors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDFs" Schema="dbo" store:Type="Tables" />
@@ -90,7 +100,17 @@
           <EntitySet Name="TipsDatas" EntityType="Self.TipsData" />
           <EntitySet Name="TipsErrors" EntityType="Self.TipsError" />
           <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDF" />
+          <EntitySet Name="TipsComments" EntityType="MartinDatabaseModel.TipsComment" />
         </EntityContainer>
+        <EntityType Name="TipsComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="7" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -133,6 +153,16 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TipsData_SoftFK" ColumnName="TipsData_SoftFK" />
                 <ScalarProperty Name="PathToPDF" ColumnName="PathToPDF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipsComments">
+            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsComment">
+              <MappingFragment StoreEntitySet="TipsComments">
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

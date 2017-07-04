@@ -28,5 +28,6 @@ namespace Fotbollstips
         public virtual DbSet<TipsData> TipsDatas { get; set; }
         public virtual DbSet<TipsError> TipsErrors { get; set; }
         public virtual DbSet<TipsPathToPDF> TipsPathToPDFs { get; set; }
+        public virtual DbSet<TipsComment> TipsComments { get; set; }
     }
 }

@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="MartinDatabaseModel.TipsData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MartinDatabaseModel.TipsError" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MartinDatabaseModel.TipsPathToPDF" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinDatabaseModel.TipsComment" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
