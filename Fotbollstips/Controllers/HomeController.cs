@@ -43,6 +43,8 @@ namespace Fotbollstips.Controllers
 
         public ActionResult Comment()
         {
+            ViewBag.ThankYouForYourComment = "";
+
             return View();
         }
 
@@ -50,6 +52,10 @@ namespace Fotbollstips.Controllers
         public ActionResult Comment(TipsComment model)
         {
             var success = DataLogic.SaveComment(model);
+
+            ModelState.Clear();
+
+            ViewBag.ThankYouForYourComment = "Tack för din kommentar!";
 
             return View();
         }
