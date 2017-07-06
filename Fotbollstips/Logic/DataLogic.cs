@@ -206,5 +206,33 @@ namespace Fotbollstips.Logic
 
             return true;
         }
+
+        public static bool SaveNewTipsData(TipsData model)
+        {
+            using (var db = new MartinDatabaseEntities())
+            {
+                var comment = new TipsData()
+                {
+                    Namn = model.Namn,
+                    PhoneNumber = model.PhoneNumber,
+                    Email = model.Email,
+                    HasPayed = false,
+                    Poäng = 0,
+                    Finallag1 = model.Finallag1,
+                    Finallag2 = model.Finallag2,
+                    Vinnare = model.Vinnare,
+                    Sverige_Kamerun = model.Sverige_Kamerun,
+                    Ryssland_Brasilien = model.Ryssland_Brasilien,
+                    Kamerun_Brasilien = model.Kamerun_Brasilien,
+                    Sverige_Ryssland = model.Sverige_Ryssland,
+                    EntryDate = DateTime.UtcNow
+                };
+
+                db.TipsDatas.Add(comment);
+                db.SaveChanges();
+            }
+
+            return true;
+        }
     }
 }

@@ -92,8 +92,42 @@
     </table>
 </div>
 
+<h1>Nedan är det som kommer visas innan VM börjar, så man inte kan titta vad andra tippat</h1>
 
 
+<div>
+    <table>
+        <tr>
+            <th>
+                Namn
+            </th>
+            <th>
+                Betalat
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Namn
+                </td>
+                @if ((bool)item.HasPayed)
+                {
+                    <td>
+                        Ja
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Nej
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
 
 
 

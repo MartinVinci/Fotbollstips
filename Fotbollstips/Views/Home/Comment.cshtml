@@ -12,6 +12,11 @@
 <div>
     @using (Html.BeginForm("Comment", "Home", FormMethod.Post))
     {
+        if (ViewBag.ThankYouForYourComment != null)
+        {
+            <div class="alert alert-success" role="alert">@ViewBag.ThankYouForYourComment</div>
+        }
+
         <p>Ditt namn</p>
         @Html.TextBoxFor(m => m.Name)
         <br />
@@ -22,19 +27,6 @@
 
         <br />
         <br />
-        <input type="submit" value="Skicka in kommentar" />
-
-        if (ViewBag.ThankYouForYourComment != "")
-        {
-            <br />
-            <br />
-            <h2>@ViewBag.ThankYouForYourComment</h2>
-        }
+        <input type="submit" class="btn btn-warning" value="Skicka in kommentar" />
     }
-        
-            
-
-
-
-
 </div>
