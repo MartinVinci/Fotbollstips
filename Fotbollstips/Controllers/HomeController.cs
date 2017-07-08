@@ -1,4 +1,5 @@
 ﻿using Fotbollstips.Logic;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,17 @@ namespace Fotbollstips.Controllers
 {
     public class HomeController : Controller
     {
+        // TODOMASTER
+        // Bättre PDF med swishinformation
+        // Skicka mail
+
+        // Hoppas att TODO - TaODO inte spelar någon roll
+
+
         public ActionResult Index()
         {
-            ViewBag.Message = "Your application description page.";
-
+            //TODO ta bort testmetod
+            //Test();
             //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             List<TipsData> tipsData = DataLogic.GetDataForPresentation();
 
@@ -43,22 +51,52 @@ namespace Fotbollstips.Controllers
             return View();
         }
 
+        private static void Test()
+        {
+            TipsData newTipsData = new TipsData()
+            {
+                EntryDate = DateTime.UtcNow,
+                Poäng = 0,
+                HasPayed = false,
+
+                Namn = "Martin2",
+                PhoneNumber = "040-123456",
+                Email = "test@test.com",
+
+                Finallag1 = "Sverige",
+                Finallag2 = "Brasilien",
+                Vinnare = "Sverige",
+
+                Sverige_Kamerun = "00",
+                Ryssland_Brasilien = "12",
+                Kamerun_Brasilien = "32",
+                Sverige_Ryssland = "21"
+            };
+
+            // Save to database
+            var saveResultOfTipsData = DataLogic.SaveNewTipsData(newTipsData);
+
+            // Create PDF
+            var pdfWorder = new PdfLogic();
+            PdfDocument pdfDocument = pdfWorder.SaveTipsDatas(newTipsData);
+
+            // Store in blob storage
+            var blobWorker = new BlobStorageLogic();
+            string imagePath = blobWorker.SavePDF(pdfDocument, newTipsData.Namn);
+
+            // Save file path to PDF
+            TipsPathToPDF pathToPdf = new TipsPathToPDF()
+            {
+                PathToPDF = imagePath,
+                TipsData_SoftFK = saveResultOfTipsData.IdOfTipsdata
+            };
+
+            var imagePathSaved = DataLogic.SaveNewTipsDataImagePath(pathToPdf); ;
+        }
+
         [HttpPost]
         public ActionResult Participate(FormCollection col)
         {
-            //string name = col["myname"];
-            //string phoneNumber = col["myphonenumber"];
-            //string email = col["myemail"];
-
-            //string finalTeam1 = col["finalteam1"];
-            //string finalTeam2 = col["finalteam2"];
-            //string winner = col["winner"];
-
-            //string svekam = GetGameResult(col, "svekam");
-            //string rysbra = GetGameResult(col, "rysbra");
-            //string kambra = GetGameResult(col, "kambra");
-            //string sverys = GetGameResult(col, "sverys");
-
             TipsData newTipsData = new TipsData()
             {
                 EntryDate = DateTime.UtcNow,
@@ -79,9 +117,34 @@ namespace Fotbollstips.Controllers
                 Sverige_Ryssland = GetGameResult(col, "sverys")
             };
 
-            var success = DataLogic.SaveNewTipsData(newTipsData);
+            // Save to database
+            var saveResultOfTipsData = DataLogic.SaveNewTipsData(newTipsData);
 
-            if (success)
+            // Create PDF
+            var pdfWorder = new PdfLogic();
+            PdfDocument pdfDocument = pdfWorder.SaveTipsDatas(newTipsData);
+
+            // Store in blob storage
+            var blobWorker = new BlobStorageLogic();
+            string imagePath = blobWorker.SavePDF(pdfDocument, newTipsData.Namn);
+
+            // Save file path to PDF
+            TipsPathToPDF pathToPdf = new TipsPathToPDF()
+            {
+                PathToPDF = imagePath,
+                TipsData_SoftFK = saveResultOfTipsData.IdOfTipsdata
+            };
+
+            var imagePathSaved = DataLogic.SaveNewTipsDataImagePath(pathToPdf);
+            
+            // Send email
+            string getEmail = col["getemail"];
+            if (getEmail.ToLower() == "ja")
+            {
+                var sendEmail = true;
+            }
+
+            if (saveResultOfTipsData.SuccessedSave)
             {
                 ModelState.Clear();
                 ViewBag.ParticipateResultSuccess = "Tack för din rad!";

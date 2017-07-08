@@ -167,6 +167,24 @@ namespace Fotbollstips.Logic
             return true;
         }
 
+        public static bool SaveUpdatedPaymentStatus(List<int> idsWhoHasPayed)
+        {
+            using (var db = new MartinDatabaseEntities())
+            {
+                foreach (var item in idsWhoHasPayed)
+                {
+                    var tipsData = (from hits in db.TipsDatas
+                                    where hits.Id == item
+                                    select hits).FirstOrDefault();
+
+                    tipsData.HasPayed = true;
+                }
+
+                db.SaveChanges();
+            }
+
+            return true;
+        }
         public static List<TipsError> GetErrors()
         {
             using (var db = new MartinDatabaseEntities())
@@ -207,28 +225,38 @@ namespace Fotbollstips.Logic
             return true;
         }
 
-        public static bool SaveNewTipsData(TipsData model)
+        public static SavedTipsDataResult SaveNewTipsData(TipsData tipsData)
+        {
+            try
+            {
+
+                using (var db = new MartinDatabaseEntities())
+                {
+                    db.TipsDatas.Add(tipsData);
+                    db.SaveChanges();
+
+                    return new SavedTipsDataResult()
+                    {
+                        IdOfTipsdata = tipsData.Id,
+                        SuccessedSave = true
+                    };
+                }
+            }
+            catch(Exception ex)
+            {
+                return new SavedTipsDataResult()
+                {
+                    IdOfTipsdata = 0,
+                    SuccessedSave = false
+                };
+            }
+        }
+
+        public static bool SaveNewTipsDataImagePath(TipsPathToPDF path)
         {
             using (var db = new MartinDatabaseEntities())
             {
-                var comment = new TipsData()
-                {
-                    Namn = model.Namn,
-                    PhoneNumber = model.PhoneNumber,
-                    Email = model.Email,
-                    HasPayed = false,
-                    Poäng = 0,
-                    Finallag1 = model.Finallag1,
-                    Finallag2 = model.Finallag2,
-                    Vinnare = model.Vinnare,
-                    Sverige_Kamerun = model.Sverige_Kamerun,
-                    Ryssland_Brasilien = model.Ryssland_Brasilien,
-                    Kamerun_Brasilien = model.Kamerun_Brasilien,
-                    Sverige_Ryssland = model.Sverige_Ryssland,
-                    EntryDate = DateTime.UtcNow
-                };
-
-                db.TipsDatas.Add(comment);
+                db.TipsPathToPDFs.Add(path);
                 db.SaveChanges();
             }
 

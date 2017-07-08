@@ -16,7 +16,7 @@ namespace Fotbollstips.Logic
         {
 
         }
-        public void SavePDF(PdfDocument document)
+        public string SavePDF(PdfDocument document, string name)
         {
             string accountName = "storagemartin";
             string accountKey = "NADhxvTU40qlYify/eTZR+li4xkIaIUsbx8Kgz+SKUEoXmiVomKVIVvCTQjCSd+xyVNLy5x44e8nu44kl6FO7w==";
@@ -27,12 +27,11 @@ namespace Fotbollstips.Logic
 
                 CloudBlobClient client = account.CreateCloudBlobClient();
 
-                CloudBlobContainer sampleContainer = client.GetContainerReference("testimages");
+                CloudBlobContainer sampleContainer = client.GetContainerReference("rows2");
                 sampleContainer.CreateIfNotExists();
 
-
-                string randomNumber = RandomNumber();
-                CloudBlockBlob blob = sampleContainer.GetBlockBlobReference(randomNumber + ".pdf");
+                string fileName = string.Format("{0}_{1}.pdf", name, Guid.NewGuid());
+                CloudBlockBlob blob = sampleContainer.GetBlockBlobReference(fileName);
 
                 //var document = CreateDocument();
                 using (MemoryStream myStream = new MemoryStream())
@@ -42,6 +41,7 @@ namespace Fotbollstips.Logic
                     blob.UploadFromStream(myStream);
                 }
 
+                return blob.SnapshotQualifiedStorageUri.PrimaryUri.ToString();
 
                 //var stream = ConvertMemDocToMemoryStream2(document);
 
@@ -58,9 +58,10 @@ namespace Fotbollstips.Logic
             catch (Exception ex)
             {
                 var stophere = 3;
+                return "";
             }
 
-
+            return "";
 
         }
         private static string RandomNumber()

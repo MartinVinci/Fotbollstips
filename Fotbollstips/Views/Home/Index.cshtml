@@ -4,7 +4,9 @@
 }
 
 <div class="jumbotron">
-    <p>Lite text</p>
+    <p>Resultat för VM-tipset 2018.</p>
+    <p>Totalt är xx rader inlämnade vilket innebär yyy kr till vinnaren.</p>
+    <p>Ett poäng per rätt resultat ger 51 poäng som max. (48 matcher, 2 finallag och 1 vinnare.)</p>
     @*<h1>ASP.NET</h1>
         <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
         <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
@@ -92,8 +94,20 @@
     </table>
 </div>
 
-<h1>Nedan är det som kommer visas innan VM börjar, så man inte kan titta vad andra tippat</h1>
 
+<br /><br />
+<h1 style="color: red">Nedan är det som kommer visas innan VM börjar, så man inte kan titta vad andra tippat</h1>
+<br /><br />
+
+<div class="jumbotron">
+    <p>Följande personer har lämnat in rader för VM-tipset, förutom de som lämnat in en kopia på restaurangerna.
+    Din rad är inte giltig förrän du betalat in 50 kronor till telefonnummer xxxx-xxxxxx.</p>
+    <p>Har du några frågor så
+    gå in under fliken "Ge en kommentar" eller skicka ett mail direkt till vmtips2018@gmail.com.</p>
+    <p><strong>Senaste tid för uppdatering av betalning: 2017-07-08 kl 16:28</strong> (Det innebär
+    alltså att du kan ha betalat men att administratören inte uppdaterat denna sidan än)</p>
+
+</div>
 
 <div>
     <table>
@@ -108,6 +122,11 @@
 
         @foreach (var item in Model)
         {
+            if(item.Namn == "Rätt svar")
+            {
+                continue;
+            }
+
             <tr>
                 <td>
                     @item.Namn

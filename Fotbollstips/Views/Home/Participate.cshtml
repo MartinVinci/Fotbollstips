@@ -5,7 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Lämna in rad</h2>
+<div>
+    <h2>Lämna in rad</h2>
+    <p>Fyll i formuläret nedan för att skicka in din tipsrad online i stället för att 
+    lämna in en papperskopia till någon av restaurangerna. Har du några frågor så
+    gå in under fliken "Ge en kommentar" eller skicka ett mail direkt till vmtips2018@gmail.com.</p>
+    <p>Betalning gör du genom Swish till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer 
+    det stå vid sidan av ditt namn under fliken Resultat.</p>
+    <p><strong>Raden är alltså inte giltig förrän du betalat!</strong></p>
+    <p><i>Du kommer få ett mail med en länk där du kan ladda ner din rad, men jag rekommenderar att du om möjligt 
+        tar en skärmdump eller skriver ner din rad om något skulle gå fel i programmeringen när du trycker på 
+        skicka in. //Administratören</i></p>
+</div>
+
 @*<div class="jumbotron">
         <p>Är något oklart, vill du fråga något, ge beröm eller bara säga hej?</p>
         <p> Skicka gärna in en kommentar!</p>
@@ -30,7 +42,7 @@ else if (ViewBag.ParticipateResultFail != null)
                     <table>
                         <tbody>
                             <tr>
-                                <td>Namn</td>
+                                <td>För- och efternamn</td>
                                 <td><input type="text" name="myname" /></td>
                             </tr>
                             <tr class=".info">
@@ -41,7 +53,12 @@ else if (ViewBag.ParticipateResultFail != null)
                                 <td>Email</td>
                                 <td><input type="text" name="myemail" /></td>
                             </tr>
+                            <tr>
+                                <td>Vill du få email? Skriv "ja" i så fall (utan citattecken). </td>
+                                <td><input type="text" name="getemail" /></td>
+                            </tr>
                     </table>
+                    <p>Att välja om man ska få email eller inte kommer tas bort när man ska anmäla sig på riktigt</p>
                 </div>
                 <div class="panel-body">
                     @*<table width="50%">*@

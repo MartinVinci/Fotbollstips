@@ -1,0 +1,131 @@
+﻿@model List<Fotbollstips.TipsData>
+
+@{
+    ViewBag.Title = "Betalningar";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Resultat : @ViewBag.Number</h2>
+
+<div>
+    @using (Html.BeginForm("Index", "Payment", FormMethod.Post))
+    {
+        if (Model.Count() > 0)
+        {
+            <table>
+                <tr>
+                    <th>
+                        Namn
+                    </th>
+                    <th>
+                        Betalat
+                    </th>
+                    <th>
+                        EntryDate
+                    </th>
+                    <th>
+                        Id
+                    </th>
+                </tr>
+                @for (var i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.TextBoxFor(m => m[i].Namn)
+                        </td>
+                        <td>
+                            @*@Html.TextBoxFor(m => m[i].HasPayed)*@
+                            @Html.RadioButtonFor(m => m[i].HasPayed, "False")
+                            @Html.RadioButtonFor(m => m[i].HasPayed, "True")
+                        </td>
+                        <td>
+                            @Model[i].EntryDate.ToString()
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => m[i].Id)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <input type="submit" value="Spara" />
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+    @*<table>
+            <tr>
+                <th>
+                    <a href="~/Views/Payment/Index.cshtml">~/Views/Payment/Index.cshtml</a>
+                    Namn
+                </th>
+                <th>
+                    Poäng
+                </th>
+                <th>
+                    Finallag 1
+                </th>
+                <th>
+                    Finallag 2
+                </th>
+                <th>
+                    Vinnare finalen
+                </th>
+                <th>
+                    Sve-Kam
+                </th>
+                <th>
+                    Rys-Bra
+                </th>
+                <th>
+                    Kam-Bra
+                </th>
+                <th>
+                    Sve-Rys
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Model.Namn
+                </td>
+                <td>
+                    @Model.Poäng
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Finallag1)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Finallag2)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Vinnare)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Sverige_Kamerun)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Ryssland_Brasilien)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Kamerun_Brasilien)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Sverige_Ryssland)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Spara" />
+                </td>
+            </tr>
+
+
+
+        </table>*@
+
+
+
+
+
+</div>
