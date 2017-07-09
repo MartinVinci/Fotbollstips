@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -27,7 +28,9 @@ namespace Fotbollstips.Logic
                 mail.Body = GetEmailBody(blobUrl);
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("vmtips2018", "S4onybut!1");
+                string password = ConfigurationManager.AppSettings["MailPassword"];
+
+                SmtpServer.Credentials = new System.Net.NetworkCredential("vmtips2018", password);
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);

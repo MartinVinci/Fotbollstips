@@ -4,6 +4,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -23,7 +24,8 @@ namespace Fotbollstips.Logic
         public string SavePDF(PdfDocument document, string name)
         {
             string accountName = "storagemartin";
-            string accountKey = "NADhxvTU40qlYify/eTZR+li4xkIaIUsbx8Kgz+SKUEoXmiVomKVIVvCTQjCSd+xyVNLy5x44e8nu44kl6FO7w==";
+            string accountKey = ConfigurationManager.AppSettings["BlobPassword"];
+            //string accountKey = "NADhxvTU40qlYify/eTZR+li4xkIaIUsbx8Kgz+SKUEoXmiVomKVIVvCTQjCSd+xyVNLy5x44e8nu44kl6FO7w==";
             try
             {
                 StorageCredentials creds = new StorageCredentials(accountName, accountKey);
@@ -31,7 +33,7 @@ namespace Fotbollstips.Logic
 
                 CloudBlobClient client = account.CreateCloudBlobClient();
 
-                CloudBlobContainer sampleContainer = client.GetContainerReference("rows2");
+                CloudBlobContainer sampleContainer = client.GetContainerReference("rows3");
                 sampleContainer.CreateIfNotExists();
 
                 string fileName = string.Format("{0}_{1}.pdf", name, Guid.NewGuid());
