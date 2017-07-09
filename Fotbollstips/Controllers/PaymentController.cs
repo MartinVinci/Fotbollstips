@@ -38,7 +38,5 @@ namespace Fotbollstips.Controllers
 
             return Index();
         }
-        // GET: Payment
-
     }
 }

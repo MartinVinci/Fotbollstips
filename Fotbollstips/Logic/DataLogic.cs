@@ -169,21 +169,40 @@ namespace Fotbollstips.Logic
 
         public static bool SaveUpdatedPaymentStatus(List<int> idsWhoHasPayed)
         {
-            using (var db = new MartinDatabaseEntities())
+            try
             {
-                foreach (var item in idsWhoHasPayed)
+                using (var db = new MartinDatabaseEntities())
                 {
-                    var tipsData = (from hits in db.TipsDatas
-                                    where hits.Id == item
-                                    select hits).FirstOrDefault();
+                    foreach (var item in idsWhoHasPayed)
+                    {
+                        var tipsData = (from hits in db.TipsDatas
+                                        where hits.Id == item
+                                        select hits).FirstOrDefault();
 
-                    tipsData.HasPayed = true;
+                        tipsData.HasPayed = true;
+                    }
+
+                    db.SaveChanges();
                 }
 
-                db.SaveChanges();
+                return true;
             }
+            catch (Exception e)
+            {
+                using (var db = new MartinDatabaseEntities())
+                {
+                    TipsError error = new TipsError()
+                    {
+                        Exception = e.ToString(),
+                        InnerException = e.InnerException != null ? e.InnerException.ToString() : "NULL",
+                        EntryDate = DateTime.UtcNow
+                    };
 
-            return true;
+                    db.TipsErrors.Add(error);
+                    db.SaveChanges();
+                }
+                return false;
+            }
         }
         public static List<TipsError> GetErrors()
         {
@@ -229,7 +248,6 @@ namespace Fotbollstips.Logic
         {
             try
             {
-
                 using (var db = new MartinDatabaseEntities())
                 {
                     db.TipsDatas.Add(tipsData);
@@ -242,8 +260,20 @@ namespace Fotbollstips.Logic
                     };
                 }
             }
-            catch(Exception ex)
+            catch (Exception e)
             {
+                using (var db = new MartinDatabaseEntities())
+                {
+                    TipsError error = new TipsError()
+                    {
+                        Exception = e.ToString(),
+                        InnerException = e.InnerException != null ? e.InnerException.ToString() : "NULL",
+                        EntryDate = DateTime.UtcNow
+                    };
+
+                    db.TipsErrors.Add(error);
+                    db.SaveChanges();
+                }
                 return new SavedTipsDataResult()
                 {
                     IdOfTipsdata = 0,

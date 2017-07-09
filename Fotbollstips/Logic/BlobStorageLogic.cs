@@ -17,10 +17,7 @@ namespace Fotbollstips.Logic
         {
 
         }
-        private string NameWithoutSpace(string name)
-        {
-            return name.Replace(' ', '_');
-        }
+        
         public string SavePDF(PdfDocument document, string name)
         {
             string accountName = "storagemartin";
@@ -48,70 +45,28 @@ namespace Fotbollstips.Logic
                 }
 
                 return blob.SnapshotQualifiedStorageUri.PrimaryUri.ToString();
-
-                //var stream = ConvertMemDocToMemoryStream2(document);
-
-                //blob.UploadFromStream(stream);
-
-                //using (Stream file = System.IO.File.OpenRead(@"C:\bimdemo\ball.jpg"))
-                //{
-                //    blob.UploadFromStream(file);
-                //}
-
-
-
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                var stophere = 3;
-                return "";
+                using (var db = new MartinDatabaseEntities())
+                {
+                    TipsError error = new TipsError()
+                    {
+                        Exception = e.ToString(),
+                        InnerException = e.InnerException != null ? e.InnerException.ToString() : "NULL",
+                        EntryDate = DateTime.UtcNow
+                    };
+
+                    db.TipsErrors.Add(error);
+                    db.SaveChanges();
+                }
+                return "Något gick fel";
             }
-
-            return "";
-
         }
-        private static string RandomNumber()
+
+        private string NameWithoutSpace(string name)
         {
-            Random rand = new Random();
-            return rand.Next(0, 10000).ToString();
+            return name.Replace(' ', '_');
         }
-
-        //private Document CreateDocument()
-        //{
-        //    Document document = new Document();
-        //    var section = document.AddSection();
-        //    var paragraph = section.AddParagraph("Report Demo");
-
-        //    // Add other document elements here
-
-        //    return document;
-        //}
-        //protected static MemoryStream ConvertMemDocToMemoryStream(Document document)
-        //{
-        //    PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false, PdfFontEmbedding.Always);
-        //    pdfRenderer.Document = document;
-        //    pdfRenderer.RenderDocument();
-        //    MemoryStream stream = new MemoryStream();
-        //    pdfRenderer.PdfDocument.Save(stream, false);
-        //    return stream;
-        //}
-        //protected static MemoryStream ConvertMemDocToMemoryStream2(PdfDocument document)
-        //{
-        //    try
-        //    {
-        //        PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false, PdfFontEmbedding.Always);
-        //        pdfRenderer.PdfDocument = document;
-
-        //        pdfRenderer.RenderDocument();
-        //        MemoryStream stream = new MemoryStream();
-        //        pdfRenderer.PdfDocument.Save(stream, false);
-        //        return stream;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        var hejsan = e;
-        //    }
-        //    return new MemoryStream();
-        //}
     }
 }

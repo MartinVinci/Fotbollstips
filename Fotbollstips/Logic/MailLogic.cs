@@ -35,8 +35,20 @@ namespace Fotbollstips.Logic
 
                 SmtpServer.Send(mail);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                using (var db = new MartinDatabaseEntities())
+                {
+                    TipsError error = new TipsError()
+                    {
+                        Exception = e.ToString(),
+                        InnerException = e.InnerException != null ? e.InnerException.ToString() : "NULL",
+                        EntryDate = DateTime.UtcNow
+                    };
+
+                    db.TipsErrors.Add(error);
+                    db.SaveChanges();
+                }
                 return false;
             }
             return true;
