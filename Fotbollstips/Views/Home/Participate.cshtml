@@ -5,24 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <h2>Lämna in rad</h2>
-    <p>Fyll i formuläret nedan för att skicka in din tipsrad online i stället för att 
-    lämna in en papperskopia till någon av restaurangerna. Har du några frågor så
-    gå in under fliken "Ge en kommentar" eller skicka ett mail direkt till vmtips2018@gmail.com.</p>
-    <p>Betalning gör du genom Swish till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer 
-    det stå vid sidan av ditt namn under fliken Resultat.</p>
-    <p><strong>Raden är alltså inte giltig förrän du betalat!</strong></p>
-    <p><i>Du kommer få ett mail med en länk där du kan ladda ner din rad, men jag rekommenderar att du om möjligt 
-        tar en skärmdump eller skriver ner din rad om något skulle gå fel i programmeringen när du trycker på 
-        skicka in. //Administratören</i></p>
+
+<div class="jumbotron">
+    <h2>Lämna in tipsrad</h2>
 </div>
-
-@*<div class="jumbotron">
-        <p>Är något oklart, vill du fråga något, ge beröm eller bara säga hej?</p>
-        <p> Skicka gärna in en kommentar!</p>
-    </div>*@
-
+<div>
+    <p>
+        Betalning gör du genom Swish till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer
+        det stå vid sidan av ditt namn under fliken Resultat.
+    </p>
+    <p><strong>Raden är alltså inte giltig förrän du betalat!</strong></p>
+    <p>
+        <i>
+            Du kommer få ett mail med en länk där du kan ladda ner din rad, men jag rekommenderar att du om möjligt
+            tar en skärmdump eller skriver ner din rad om något skulle gå fel i programmeringen när du trycker på
+            skicka in. //Administratören
+        </i>
+    </p>
+</div>
 
 @if (ViewBag.ParticipateResultSuccess != null)
 {
@@ -32,203 +32,203 @@ else if (ViewBag.ParticipateResultFail != null)
 {
     <div class="alert alert-danger" role="alert">@ViewBag.ParticipateResultFail</div>
 }
-   
-    <div>
-        @using (Html.BeginForm("Participate", "Home", FormMethod.Post))
-        {
-            <div class="panel panel-info">
-                <!-- Default panel contents -->
-                <div class="panel-heading">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>För- och efternamn</td>
-                                <td><input type="text" name="myname" /></td>
-                            </tr>
-                            <tr class=".info">
-                                <td>Telefonnummer</td>
-                                <td><input type="text" name="myphonenumber" /></td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td><input type="text" name="myemail" /></td>
-                            </tr>
-                            <tr>
-                                <td>Vill du få email? Skriv "ja" i så fall (utan citattecken). </td>
-                                <td><input type="text" name="getemail" /></td>
-                            </tr>
-                    </table>
-                    <p>Att välja om man ska få email eller inte kommer tas bort när man ska anmäla sig på riktigt</p>
-                </div>
-                <div class="panel-body">
-                    @*<table width="50%">*@
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Sverige - Kamerun</td>
-                                <td>
-                                    <select size="1" name="svekam1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                    - <select size="1" name="svekam2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ryssland - Brasilien</td>
-                                <td>
-                                    <select size="1" name="rysbra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                    - <select size="1" name="rysbra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kamerun - Brasilien</td>
-                                <td>
-                                    <select size="1" name="kambra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                    - <select size="1" name="kambra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sverige - Ryssland</td>
-                                <td>
-                                    <select size="1" name="sverys1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                    - <select size="1" name="sverys2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Finallag 1</td>
-                                <td>
-                                    <select size="1" name="finalteam1">
-                                        <option value="Sverige" selected="selected">
-                                            Sverige
-                                        </option>
-                                        <option value="Kamerun">
-                                            Kamerun
-                                        </option>
-                                        <option value="Brasilien">
-                                            Brasilien
-                                        </option>
-                                        <option value="Ryssland">
-                                            Ryssland
-                                        </option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Finallag 2</td>
-                                <td>
-                                    <select size="1" name="finalteam2">
-                                        <option value="Sverige" selected="selected">
-                                            Sverige
-                                        </option>
-                                        <option value="Kamerun">
-                                            Kamerun
-                                        </option>
-                                        <option value="Brasilien">
-                                            Brasilien
-                                        </option>
-                                        <option value="Ryssland">
-                                            Ryssland
-                                        </option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Vinnare</td>
-                                <td>
-                                    <select size="1" name="winner">
-                                        <option value="Sverige" selected="selected">
-                                            Sverige
-                                        </option>
-                                        <option value="Kamerun">
-                                            Kamerun
-                                        </option>
-                                        <option value="Brasilien">
-                                            Brasilien
-                                        </option>
-                                        <option value="Ryssland">
-                                            Ryssland
-                                        </option>
-                                    </select>
-                                </td>
-                            </tr>
-                    </table>
-                </div>
+
+<div>
+    @using (Html.BeginForm("Participate", "Home", FormMethod.Post))
+    {
+        <div class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>För- och efternamn</td>
+                            <td><input type="text" name="myname" /></td>
+                        </tr>
+                        <tr class=".info">
+                            <td>Telefonnummer</td>
+                            <td><input type="text" name="myphonenumber" /></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="text" name="myemail" /></td>
+                        </tr>
+                        <tr>
+                            <td>Vill du få email? Skriv "ja" i så fall (utan citattecken). </td>
+                            <td><input type="text" name="getemail" /></td>
+                        </tr>
+                </table>
+                <p>Att välja om man ska få email eller inte kommer tas bort när man ska anmäla sig på riktigt</p>
             </div>
-            <div>
-                <input type="submit" class="btn btn-warning" value="Lämna in rad" />
+            <div class="panel-body">
+                @*<table width="50%">*@
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Sverige - Kamerun</td>
+                            <td>
+                                <select size="1" name="svekam1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                                - <select size="1" name="svekam2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ryssland - Brasilien</td>
+                            <td>
+                                <select size="1" name="rysbra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                                - <select size="1" name="rysbra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kamerun - Brasilien</td>
+                            <td>
+                                <select size="1" name="kambra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                                - <select size="1" name="kambra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sverige - Ryssland</td>
+                            <td>
+                                <select size="1" name="sverys1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                                - <select size="1" name="sverys2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Finallag 1</td>
+                            <td>
+                                <select size="1" name="finalteam1">
+                                    <option value="Sverige" selected="selected">
+                                        Sverige
+                                    </option>
+                                    <option value="Kamerun">
+                                        Kamerun
+                                    </option>
+                                    <option value="Brasilien">
+                                        Brasilien
+                                    </option>
+                                    <option value="Ryssland">
+                                        Ryssland
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Finallag 2</td>
+                            <td>
+                                <select size="1" name="finalteam2">
+                                    <option value="Sverige" selected="selected">
+                                        Sverige
+                                    </option>
+                                    <option value="Kamerun">
+                                        Kamerun
+                                    </option>
+                                    <option value="Brasilien">
+                                        Brasilien
+                                    </option>
+                                    <option value="Ryssland">
+                                        Ryssland
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vinnare</td>
+                            <td>
+                                <select size="1" name="winner">
+                                    <option value="Sverige" selected="selected">
+                                        Sverige
+                                    </option>
+                                    <option value="Kamerun">
+                                        Kamerun
+                                    </option>
+                                    <option value="Brasilien">
+                                        Brasilien
+                                    </option>
+                                    <option value="Ryssland">
+                                        Ryssland
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                </table>
             </div>
-        }
-    </div>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-warning" value="Lämna in rad" />
+        </div>
+    }
+</div>
 
 
-    @*<tr>
-            <td>Sverige - Kamerun</td>
-            <td>
-                <select size="1" name="svekam1">
-                    <option value="0" selected="selected">
-                        0
-                    </option>
-                    <option value="1">
-                        1
-                    </option>
-                    <option value="2">
-                        2
-                    </option>
-                    <option value="3">
-                        3
-                    </option>
-                    <option value="4">
-                        4
-                    </option>
-                    <option value="5">
-                        5
-                    </option>
-                    <option value="6">
-                        6
-                    </option>
-                    <option value="7">
-                        7
-                    </option>
-                    <option value="8">
-                        8
-                    </option>
-                    <option value="9">
-                        9
-                    </option>
-                </select>
-                -
-                <select size="1" name="svekam2">
-                    <option value="0" selected="selected">
-                        0
-                    </option>
-                    <option value="1">
-                        1
-                    </option>
-                    <option value="2">
-                        2
-                    </option>
-                    <option value="3">
-                        3
-                    </option>
-                    <option value="4">
-                        4
-                    </option>
-                    <option value="5">
-                        5
-                    </option>
-                    <option value="6">
-                        6
-                    </option>
-                    <option value="7">
-                        7
-                    </option>
-                    <option value="8">
-                        8
-                    </option>
-                    <option value="9">
-                        9
-                    </option>
-                </select>
-            </td>
-        </tr>*@
+@*<tr>
+        <td>Sverige - Kamerun</td>
+        <td>
+            <select size="1" name="svekam1">
+                <option value="0" selected="selected">
+                    0
+                </option>
+                <option value="1">
+                    1
+                </option>
+                <option value="2">
+                    2
+                </option>
+                <option value="3">
+                    3
+                </option>
+                <option value="4">
+                    4
+                </option>
+                <option value="5">
+                    5
+                </option>
+                <option value="6">
+                    6
+                </option>
+                <option value="7">
+                    7
+                </option>
+                <option value="8">
+                    8
+                </option>
+                <option value="9">
+                    9
+                </option>
+            </select>
+            -
+            <select size="1" name="svekam2">
+                <option value="0" selected="selected">
+                    0
+                </option>
+                <option value="1">
+                    1
+                </option>
+                <option value="2">
+                    2
+                </option>
+                <option value="3">
+                    3
+                </option>
+                <option value="4">
+                    4
+                </option>
+                <option value="5">
+                    5
+                </option>
+                <option value="6">
+                    6
+                </option>
+                <option value="7">
+                    7
+                </option>
+                <option value="8">
+                    8
+                </option>
+                <option value="9">
+                    9
+                </option>
+            </select>
+        </td>
+    </tr>*@
 
 
 
