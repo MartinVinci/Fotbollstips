@@ -229,6 +229,7 @@
     </Compile>
     <Compile Include="Logic\BlobStorageLogic.cs" />
     <Compile Include="Logic\DataLogic.cs" />
+    <Compile Include="Logic\MailLogic.cs" />
     <Compile Include="Logic\PdfLogic.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />

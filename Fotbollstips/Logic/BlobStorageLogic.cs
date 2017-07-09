@@ -16,6 +16,10 @@ namespace Fotbollstips.Logic
         {
 
         }
+        private string NameWithoutSpace(string name)
+        {
+            return name.Replace(' ', '_');
+        }
         public string SavePDF(PdfDocument document, string name)
         {
             string accountName = "storagemartin";

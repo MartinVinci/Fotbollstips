@@ -11,9 +11,8 @@ namespace Fotbollstips.Controllers
     public class HomeController : Controller
     {
         // TODOMASTER
-        // Bättre PDF med swishinformation
         // Skicka mail
-
+        // Lägg lösenord i Configfil
         // Hoppas att TODO - TaODO inte spelar någon roll
 
 
@@ -136,12 +135,13 @@ namespace Fotbollstips.Controllers
             };
 
             var imagePathSaved = DataLogic.SaveNewTipsDataImagePath(pathToPdf);
-            
+
             // Send email
             string getEmail = col["getemail"];
             if (getEmail.ToLower() == "ja")
             {
-                var sendEmail = true;
+                var mailWorker = new MailLogic();
+                mailWorker.SendMail(newTipsData.Email, pathToPdf.PathToPDF);
             }
 
             if (saveResultOfTipsData.SuccessedSave)
