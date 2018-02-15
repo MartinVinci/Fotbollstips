@@ -11,7 +11,6 @@ namespace Fotbollstips.Logic
 {
     public class BusinessLogic
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(BusinessLogic));
         public static List<TipsData> GetDataForPresentation()
         {
             return DataLogic.GetDataForPresentation();

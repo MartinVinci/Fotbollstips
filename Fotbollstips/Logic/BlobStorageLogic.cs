@@ -15,8 +15,6 @@ namespace Fotbollstips.Logic
 {
     public class BlobStorageLogic
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(BlobStorageLogic));
-
         public BlobStorageLogic()
         {
 
@@ -52,11 +50,9 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, "An error in:", "SavePDF", e);
 
-                log.Error(string.Format("Error in SavePDF method, Inner: {0}.", inner), e);
-
-                return "Något gick fel";
+                return "Något gick fel när PDF skulle sparas.";
             }
         }
 
