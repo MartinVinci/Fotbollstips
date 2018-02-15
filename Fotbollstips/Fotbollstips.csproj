@@ -243,6 +243,7 @@
     <Compile Include="Logic\BlobStorageLogic.cs" />
     <Compile Include="Logic\BusinessLogic.cs" />
     <Compile Include="Logic\DataLogic.cs" />
+    <Compile Include="Logic\Log4NetLogic.cs" />
     <Compile Include="Logic\MailLogic.cs" />
     <Compile Include="Logic\PdfLogic.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

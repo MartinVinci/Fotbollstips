@@ -11,7 +11,6 @@ namespace Fotbollstips.Logic
 {
     public class BusinessLogic
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(BusinessLogic));
         public static List<TipsData> GetDataForPresentation()
         {
             return DataLogic.GetDataForPresentation();
@@ -152,9 +151,7 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
-
-                log.Error(string.Format("Error in ParticipateInTips method, Inner: {0}.", inner), e);
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, "An error in: ", "ParticipateInTips", e);
 
                 return new ParticipateResult(false, false, "");
             }

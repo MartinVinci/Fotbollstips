@@ -8,8 +8,6 @@ namespace Fotbollstips.Logic
 {
     public class DataLogic
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(DataLogic));
-
         public static string RATT_SVAR = "Rätt svar";
 
         public static List<TipsData> GetDataForPresentation()
@@ -32,9 +30,7 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
-
-                log.Error(string.Format("Error in GetDataForPresentation method, Inner: {0}.", inner), e);
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, "An error in", "GetDataForPresentation", e);
 
                 return null;
             }
@@ -56,9 +52,7 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
-
-                log.Error(string.Format("Error in GetRandomValue method, Inner: {0}.", inner), e);
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, "An error in", "GetRandomValue", e);
 
                 throw;
             }
@@ -84,9 +78,7 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
-
-                log.Error(string.Format("Error in UpdateRandomValue method, Inner: {0}.", inner), e);
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, "An error in", "UpdateRandomValue", e);
 
                 return false;
             }
@@ -458,9 +450,8 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, "An error in", "SaveUpdatedPaymentStatus", e);
 
-                log.Error(string.Format("Error in SaveUpdatedPaymentStatus method, Inner: {0}.", inner), e);
                 return false;
             }
         }
@@ -549,7 +540,7 @@ namespace Fotbollstips.Logic
             logText += string.Format("England_Belgien: {0}, ", t.England_Belgien);
             logText += string.Format("Panama_Tunisien: {0}, ", t.Panama_Tunisien);
 
-            log.Info(logText);
+            Log4NetLogic.Log(Log4NetLogic.LogLevel.INFO, logText, "SaveTipsDataToLogFile");
         }
         public static SavedTipsDataResult SaveNewTipsData(TipsData tipsData)
         {
@@ -558,7 +549,7 @@ namespace Fotbollstips.Logic
                 SaveTipsDataToLogFile(tipsData);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Do nothing, since log to textfile does not work
             }
@@ -580,9 +571,7 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
-
-                log.Error(string.Format("Error in SaveNewTipsData method, Inner: {0}.", inner), e);
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, "An error in", "SaveNewTipsData", e);
 
                 return new SavedTipsDataResult()
                 {
