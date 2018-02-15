@@ -11,9 +11,6 @@ namespace Fotbollstips.Controllers
     {
         public ActionResult Index()
         {
-            //List<TipsError> errors = DataLogic.GetErrors();
-
-            //return View(errors.ToList());
             return View();
         }
     }
