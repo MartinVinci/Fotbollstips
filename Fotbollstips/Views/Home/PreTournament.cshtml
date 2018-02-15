@@ -1,0 +1,62 @@
+﻿@model List<Fotbollstips.TipsData>
+@{
+    ViewBag.Title = "Innan VM";
+}
+<div class="jumbotron">
+    <p>
+        Följande personer har lämnat in rader för VM-tipset, förutom de som lämnat in en kopia på restaurangerna.
+        Din rad är inte giltig förrän du betalat in 50 kronor via swish till telefonnummer xxxx-xxxxxx.
+    </p>
+    <p>
+        <strong>Viktigt: </strong>I meddelandet i Swish så skriv namnet precis som det står nedan.
+    </p>
+    <p>
+        Har du några frågor så
+        gå in under fliken "Ge en kommentar" eller skicka ett mail direkt till vmtips2018@gmail.com.
+    </p>
+    <p>
+        <strong>Jag (tipsadministratören Martin) uppdaterar denna information manuellt vid tillfälle</strong> (Det innebär
+        alltså att du kan ha betalat men att jag inte uppdaterat denna sidan än)
+    </p>
+
+</div>
+
+<div>
+    <h4>Senaste uppdatering:  @ViewBag.LatestDate</h4>
+    <table>
+        <tr>
+            <th>
+                Namn
+            </th>
+            <th>
+                Betalat
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Namn == "Rätt svar")
+            {
+                continue;
+            }
+
+            <tr>
+                <td>
+                    @item.Namn
+                </td>
+                @if ((bool)item.HasPayed)
+                {
+                    <td>
+                        Ja
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Nej
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>

@@ -12,11 +12,12 @@ namespace Fotbollstips
     using System;
     using System.Collections.Generic;
     
-    public partial class TipsError
+    public partial class TipsRandomValue
     {
         public int Id { get; set; }
-        public string Exception { get; set; }
-        public string InnerException { get; set; }
-        public Nullable<System.DateTime> EntryDate { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public System.DateTime EntryDate { get; set; }
+        public System.DateTime Modified { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,19 +11,30 @@ namespace Fotbollstips.Controllers
 {
     public class HomeController : Controller
     {
-        // TODOMASTER
-        // Hoppas att TODO - TaODO inte spelar någon roll
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(HomeController));
 
         public ActionResult Index()
         {
-            //TODO ta bort testmetod
-            //Test();
+            // TODO Fixa här
+            var tournamentStart = Convert.ToDateTime(ConfigurationManager.AppSettings["TournamentStartTime"]);
 
-            List<TipsData> tipsData = DataLogic.GetDataForPresentation();
+            List<TipsData> tipsData = BusinessLogic.GetDataForPresentation();
+
+            ViewBag.LatestDate = BusinessLogic.GetRandomValue("PayedLatestUpdate");
+
+            if (tournamentStart < DateTime.Now)
+            {
+                tipsData = BusinessLogic.RemoveSensitiveData(tipsData);
+                tipsData = tipsData.OrderBy(o => o.Namn).ToList();
+
+                return View("PreTournament", tipsData);
+            }
+
 
             return View(tipsData.ToList());
         }
+
+
 
         public ActionResult About()
         {
@@ -41,110 +53,38 @@ namespace Fotbollstips.Controllers
             ViewBag.ParticipateResultSuccess = null;
             ViewBag.ParticipateResultFail = null;
 
+            var tournamentStart = Convert.ToDateTime(ConfigurationManager.AppSettings["TournamentStartTime"]);
+
+            if (tournamentStart < DateTime.Now)
+            {
+                return View("ParticipateToLate");
+            }
+
             return View();
         }
 
-        private static void Test()
-        {
-            TipsData newTipsData = new TipsData()
-            {
-                EntryDate = DateTime.UtcNow,
-                Poäng = 0,
-                HasPayed = false,
-
-                Namn = "Martin2",
-                PhoneNumber = "040-123456",
-                Email = "test@test.com",
-
-                Finallag1 = "Sverige",
-                Finallag2 = "Brasilien",
-                Vinnare = "Sverige",
-
-                Sverige_Kamerun = "00",
-                Ryssland_Brasilien = "12",
-                Kamerun_Brasilien = "32",
-                Sverige_Ryssland = "21"
-            };
-
-            // Save to database
-            var saveResultOfTipsData = DataLogic.SaveNewTipsData(newTipsData);
-
-            // Create PDF
-            var pdfWorder = new PdfLogic();
-            PdfDocument pdfDocument = pdfWorder.SaveTipsDatas(newTipsData);
-
-            // Store in blob storage
-            var blobWorker = new BlobStorageLogic();
-            string imagePath = blobWorker.SavePDF(pdfDocument, newTipsData.Namn);
-
-            // Save file path to PDF
-            TipsPathToPDF pathToPdf = new TipsPathToPDF()
-            {
-                PathToPDF = imagePath,
-                TipsData_SoftFK = saveResultOfTipsData.IdOfTipsdata
-            };
-
-            var imagePathSaved = DataLogic.SaveNewTipsDataImagePath(pathToPdf); ;
-        }
 
         [HttpPost]
         public ActionResult Participate(FormCollection col)
         {
-            try
+            var tournamentStart = Convert.ToDateTime(ConfigurationManager.AppSettings["TournamentStartTime"]);
+
+            if (tournamentStart < DateTime.Now)
             {
-                TipsData newTipsData = new TipsData()
-                {
-                    EntryDate = DateTime.UtcNow,
-                    Poäng = 0,
-                    HasPayed = false,
+                return View("ParticipateToLate");
+            }
+            else
+            {
 
-                    Namn = col["myname"],
-                    PhoneNumber = col["myphonenumber"],
-                    Email = col["myemail"],
+                var saveResult = BusinessLogic.ParticipateInTips(col);
 
-                    Finallag1 = col["finalteam1"],
-                    Finallag2 = col["finalteam2"],
-                    Vinnare = col["winner"],
-
-                    Sverige_Kamerun = GetGameResult(col, "svekam"),
-                    Ryssland_Brasilien = GetGameResult(col, "rysbra"),
-                    Kamerun_Brasilien = GetGameResult(col, "kambra"),
-                    Sverige_Ryssland = GetGameResult(col, "sverys")
-                };
-
-                // Save to database
-                var saveResultOfTipsData = DataLogic.SaveNewTipsData(newTipsData);
-
-                // Create PDF
-                var pdfWorder = new PdfLogic();
-                PdfDocument pdfDocument = pdfWorder.SaveTipsDatas(newTipsData);
-
-                // Store in blob storage
-                var blobWorker = new BlobStorageLogic();
-                string imagePath = blobWorker.SavePDF(pdfDocument, newTipsData.Namn);
-
-                // Save file path to PDF
-                TipsPathToPDF pathToPdf = new TipsPathToPDF()
-                {
-                    PathToPDF = imagePath,
-                    TipsData_SoftFK = saveResultOfTipsData.IdOfTipsdata
-                };
-
-                var imagePathSaved = DataLogic.SaveNewTipsDataImagePath(pathToPdf);
-
-                // Send email
-                string getEmail = col["getemail"];
-                if (getEmail.ToLower() == "ja")
-                {
-                    var mailWorker = new MailLogic();
-                    mailWorker.SendMail(newTipsData.Email, pathToPdf.PathToPDF);
-                }
-
-                if (saveResultOfTipsData.SuccessedSave)
+                if (saveResult.SavedInDatabase)
                 {
                     ModelState.Clear();
                     ViewBag.ParticipateResultSuccess = "Tack för din rad!";
                     ViewBag.ParticipateResultFail = null;
+
+                    ViewBag.ReminderSwish = "Glöm inte att betala in via swish!";
                 }
                 else
                 {
@@ -152,32 +92,19 @@ namespace Fotbollstips.Controllers
                     ViewBag.ParticipateResultFail = "Något gick fel! Dessvärre har inte din rad sparats, du måste göra om det :-(";
                 }
 
-                return View();
-            }
-            catch (Exception e)
-            {
-                using (var db = new MartinDatabaseEntities())
+                if (saveResult.EmailSent)
                 {
-                    TipsError error = new TipsError()
-                    {
-                        Exception = e.ToString(),
-                        InnerException = e.InnerException != null ? e.InnerException.ToString() : "NULL",
-                        EntryDate = DateTime.UtcNow
-                    };
-
-                    db.TipsErrors.Add(error);
-                    db.SaveChanges();
+                    ViewBag.ParticipateEmailSuccess = "Ett mail är skickat till din e-postadress.";
+                    ViewBag.ParticipateEmailFail = null;
                 }
-                return View();
+                else
+                {
+                    ViewBag.ParticipateEmailSuccess = null;
+                    ViewBag.ParticipateEmailFail = string.Format("Något gick fel när ett mail skulle skickas till dig. Adressen du angav: '{0}'.", saveResult.EmailAddress);
+                }
             }
-        }
 
-        private static string GetGameResult(FormCollection col, string game)
-        {
-            string home = game + "1";
-            string away = game + "2";
-
-            return col[home] + col[away];
+            return View();
         }
 
         public ActionResult Comment()

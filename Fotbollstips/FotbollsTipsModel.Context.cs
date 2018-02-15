@@ -13,10 +13,10 @@ namespace Fotbollstips
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MartinDatabaseEntities : DbContext
+    public partial class FotbollsTipsModel : DbContext
     {
-        public MartinDatabaseEntities()
-            : base("name=MartinDatabaseEntities")
+        public FotbollsTipsModel()
+            : base("name=FotbollsTipsModel")
         {
         }
     
@@ -25,9 +25,9 @@ namespace Fotbollstips
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<TipsData> TipsDatas { get; set; }
-        public virtual DbSet<TipsError> TipsErrors { get; set; }
-        public virtual DbSet<TipsPathToPDF> TipsPathToPDFs { get; set; }
         public virtual DbSet<TipsComment> TipsComments { get; set; }
+        public virtual DbSet<TipsData> TipsDatas { get; set; }
+        public virtual DbSet<TipsPathToPDF> TipsPathToPDFs { get; set; }
+        public virtual DbSet<TipsRandomValue> TipsRandomValues { get; set; }
     }
 }

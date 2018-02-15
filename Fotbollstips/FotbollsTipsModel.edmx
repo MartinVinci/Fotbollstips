@@ -27,19 +27,54 @@
           <Property Name="Finallag1" Type="nvarchar" MaxLength="50" />
           <Property Name="Finallag2" Type="nvarchar" MaxLength="50" />
           <Property Name="Vinnare" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sverige-Kamerun" Type="nvarchar" MaxLength="50" />
-          <Property Name="Ryssland-Brasilien" Type="nvarchar" MaxLength="50" />
-          <Property Name="Kamerun-Brasilien" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sverige-Ryssland" Type="nchar" MaxLength="10" />
-          <Property Name="EntryDate" Type="datetime2" Precision="7" />
-        </EntityType>
-        <EntityType Name="TipsErrors">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Exception" Type="nvarchar(max)" />
-          <Property Name="InnerException" Type="nvarchar(max)" />
+          <Property Name="Ryssland-Saudiarabien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Egypten-Uruguay" Type="nvarchar" MaxLength="50" />
+          <Property Name="Marocko-Iran" Type="nvarchar" MaxLength="50" />
+          <Property Name="Portugal-Spanien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Frankrike-Australien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Argentina-Island" Type="nvarchar" MaxLength="50" />
+          <Property Name="Peru-Danmark" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kroatien-Nigeria" Type="nvarchar" MaxLength="50" />
+          <Property Name="CostaRica-Serbien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tyskland-Mexico" Type="nvarchar" MaxLength="50" />
+          <Property Name="Brasilien-Schweiz" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sverige-Sydkorea" Type="nvarchar" MaxLength="50" />
+          <Property Name="Belgien-Panama" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tunisien-England" Type="nvarchar" MaxLength="50" />
+          <Property Name="Colombia-Japan" Type="nvarchar" MaxLength="50" />
+          <Property Name="Polen-Senegal" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ryssland-Egypten" Type="nvarchar" MaxLength="50" />
+          <Property Name="Portugal-Marocko" Type="nvarchar" MaxLength="50" />
+          <Property Name="Uruguay-Saudiarabien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Iran-Spanien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Danmark-Australien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Frankrike-Peru" Type="nvarchar" MaxLength="50" />
+          <Property Name="Argentina-Kroatien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Brasilien-CostaRica" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nigeria-Island" Type="nvarchar" MaxLength="50" />
+          <Property Name="Serbien-Schweiz" Type="nvarchar" MaxLength="50" />
+          <Property Name="Belgien-Tunisien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sydkorea-Mexiko" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tyskland-Sverige" Type="nvarchar" MaxLength="50" />
+          <Property Name="England-Panama" Type="nvarchar" MaxLength="50" />
+          <Property Name="Japan-Senegal" Type="nvarchar" MaxLength="50" />
+          <Property Name="Polen-Colombia" Type="nvarchar" MaxLength="50" />
+          <Property Name="Saudiarabien-Egypten" Type="nvarchar" MaxLength="50" />
+          <Property Name="Uruguay-Ryssland" Type="nvarchar" MaxLength="50" />
+          <Property Name="Iran-Portugal" Type="nvarchar" MaxLength="50" />
+          <Property Name="Spanien-Marocko" Type="nvarchar" MaxLength="50" />
+          <Property Name="Danmark-Frankrike" Type="nvarchar" MaxLength="50" />
+          <Property Name="Australien-Peru" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nigeria-Argentina" Type="nvarchar" MaxLength="50" />
+          <Property Name="Island-Kroatien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sydkorea-Tyskland" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mexiko-Sverige" Type="nvarchar" MaxLength="50" />
+          <Property Name="Serbien-Brasilien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Schweiz-CostaRica" Type="nvarchar" MaxLength="50" />
+          <Property Name="Japan-Polen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Senegal-Colombia" Type="nvarchar" MaxLength="50" />
+          <Property Name="England-Belgien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Panama-Tunisien" Type="nvarchar" MaxLength="50" />
           <Property Name="EntryDate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="TipsPathToPDFs">
@@ -50,16 +85,35 @@
           <Property Name="TipsData_SoftFK" Type="int" />
           <Property Name="PathToPDF" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="TipsRandomValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Modified" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="MartinDatabaseModelStoreContainer">
           <EntitySet Name="TipsComments" EntityType="Self.TipsComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipsDatas" EntityType="Self.TipsDatas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipsErrors" EntityType="Self.TipsErrors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDFs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipsRandomValues" EntityType="Self.TipsRandomValues" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MartinDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TipsComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="7" />
+        </EntityType>
         <EntityType Name="TipsData">
           <Key>
             <PropertyRef Name="Id" />
@@ -73,19 +127,54 @@
           <Property Name="Finallag1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Finallag2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Vinnare" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sverige_Kamerun" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Ryssland_Brasilien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Kamerun_Brasilien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sverige_Ryssland" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="EntryDate" Type="DateTime" Precision="7" />
-        </EntityType>
-        <EntityType Name="TipsError">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ryssland_Saudiarabien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Egypten_Uruguay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Marocko_Iran" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Portugal_Spanien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Frankrike_Australien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Argentina_Island" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Peru_Danmark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kroatien_Nigeria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CostaRica_Serbien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tyskland_Mexico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Brasilien_Schweiz" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sverige_Sydkorea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Belgien_Panama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tunisien_England" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Colombia_Japan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Polen_Senegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ryssland_Egypten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Portugal_Marocko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uruguay_Saudiarabien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Iran_Spanien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Danmark_Australien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Frankrike_Peru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Argentina_Kroatien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Brasilien_CostaRica" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nigeria_Island" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Serbien_Schweiz" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Belgien_Tunisien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sydkorea_Mexiko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tyskland_Sverige" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="England_Panama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Japan_Senegal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Polen_Colombia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Saudiarabien_Egypten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uruguay_Ryssland" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Iran_Portugal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Spanien_Marocko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Danmark_Frankrike" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Australien_Peru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nigeria_Argentina" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Island_Kroatien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sydkorea_Tyskland" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mexiko_Sverige" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Serbien_Brasilien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Schweiz_CostaRica" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Japan_Polen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Senegal_Colombia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="England_Belgien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Panama_Tunisien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EntryDate" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="TipsPathToPDF">
@@ -96,27 +185,38 @@
           <Property Name="TipsData_SoftFK" Type="Int32" />
           <Property Name="PathToPDF" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="MartinDatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FotbollsTipsModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TipsComments" EntityType="Self.TipsComment" />
           <EntitySet Name="TipsDatas" EntityType="Self.TipsData" />
-          <EntitySet Name="TipsErrors" EntityType="Self.TipsError" />
           <EntitySet Name="TipsPathToPDFs" EntityType="Self.TipsPathToPDF" />
-          <EntitySet Name="TipsComments" EntityType="MartinDatabaseModel.TipsComment" />
+          <EntitySet Name="TipsRandomValues" EntityType="MartinDatabaseModel.TipsRandomValue" />
         </EntityContainer>
-        <EntityType Name="TipsComment">
+        <EntityType Name="TipsRandomValue">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EntryDate" Type="DateTime" Precision="7" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MartinDatabaseModelStoreContainer" CdmEntityContainer="MartinDatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="MartinDatabaseModelStoreContainer" CdmEntityContainer="FotbollsTipsModel">
+          <EntitySetMapping Name="TipsComments">
+            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsComment">
+              <MappingFragment StoreEntitySet="TipsComments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TipsDatas">
             <EntityTypeMapping TypeName="MartinDatabaseModel.TipsData">
               <MappingFragment StoreEntitySet="TipsDatas">
@@ -129,20 +229,54 @@
                 <ScalarProperty Name="Finallag1" ColumnName="Finallag1" />
                 <ScalarProperty Name="Finallag2" ColumnName="Finallag2" />
                 <ScalarProperty Name="Vinnare" ColumnName="Vinnare" />
-                <ScalarProperty Name="Sverige_Kamerun" ColumnName="Sverige-Kamerun" />
-                <ScalarProperty Name="Ryssland_Brasilien" ColumnName="Ryssland-Brasilien" />
-                <ScalarProperty Name="Kamerun_Brasilien" ColumnName="Kamerun-Brasilien" />
-                <ScalarProperty Name="Sverige_Ryssland" ColumnName="Sverige-Ryssland" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipsErrors">
-            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsError">
-              <MappingFragment StoreEntitySet="TipsErrors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Exception" ColumnName="Exception" />
-                <ScalarProperty Name="InnerException" ColumnName="InnerException" />
+                <ScalarProperty Name="Ryssland_Saudiarabien" ColumnName="Ryssland-Saudiarabien" />
+                <ScalarProperty Name="Egypten_Uruguay" ColumnName="Egypten-Uruguay" />
+                <ScalarProperty Name="Marocko_Iran" ColumnName="Marocko-Iran" />
+                <ScalarProperty Name="Portugal_Spanien" ColumnName="Portugal-Spanien" />
+                <ScalarProperty Name="Frankrike_Australien" ColumnName="Frankrike-Australien" />
+                <ScalarProperty Name="Argentina_Island" ColumnName="Argentina-Island" />
+                <ScalarProperty Name="Peru_Danmark" ColumnName="Peru-Danmark" />
+                <ScalarProperty Name="Kroatien_Nigeria" ColumnName="Kroatien-Nigeria" />
+                <ScalarProperty Name="CostaRica_Serbien" ColumnName="CostaRica-Serbien" />
+                <ScalarProperty Name="Tyskland_Mexico" ColumnName="Tyskland-Mexico" />
+                <ScalarProperty Name="Brasilien_Schweiz" ColumnName="Brasilien-Schweiz" />
+                <ScalarProperty Name="Sverige_Sydkorea" ColumnName="Sverige-Sydkorea" />
+                <ScalarProperty Name="Belgien_Panama" ColumnName="Belgien-Panama" />
+                <ScalarProperty Name="Tunisien_England" ColumnName="Tunisien-England" />
+                <ScalarProperty Name="Colombia_Japan" ColumnName="Colombia-Japan" />
+                <ScalarProperty Name="Polen_Senegal" ColumnName="Polen-Senegal" />
+                <ScalarProperty Name="Ryssland_Egypten" ColumnName="Ryssland-Egypten" />
+                <ScalarProperty Name="Portugal_Marocko" ColumnName="Portugal-Marocko" />
+                <ScalarProperty Name="Uruguay_Saudiarabien" ColumnName="Uruguay-Saudiarabien" />
+                <ScalarProperty Name="Iran_Spanien" ColumnName="Iran-Spanien" />
+                <ScalarProperty Name="Danmark_Australien" ColumnName="Danmark-Australien" />
+                <ScalarProperty Name="Frankrike_Peru" ColumnName="Frankrike-Peru" />
+                <ScalarProperty Name="Argentina_Kroatien" ColumnName="Argentina-Kroatien" />
+                <ScalarProperty Name="Brasilien_CostaRica" ColumnName="Brasilien-CostaRica" />
+                <ScalarProperty Name="Nigeria_Island" ColumnName="Nigeria-Island" />
+                <ScalarProperty Name="Serbien_Schweiz" ColumnName="Serbien-Schweiz" />
+                <ScalarProperty Name="Belgien_Tunisien" ColumnName="Belgien-Tunisien" />
+                <ScalarProperty Name="Sydkorea_Mexiko" ColumnName="Sydkorea-Mexiko" />
+                <ScalarProperty Name="Tyskland_Sverige" ColumnName="Tyskland-Sverige" />
+                <ScalarProperty Name="England_Panama" ColumnName="England-Panama" />
+                <ScalarProperty Name="Japan_Senegal" ColumnName="Japan-Senegal" />
+                <ScalarProperty Name="Polen_Colombia" ColumnName="Polen-Colombia" />
+                <ScalarProperty Name="Saudiarabien_Egypten" ColumnName="Saudiarabien-Egypten" />
+                <ScalarProperty Name="Uruguay_Ryssland" ColumnName="Uruguay-Ryssland" />
+                <ScalarProperty Name="Iran_Portugal" ColumnName="Iran-Portugal" />
+                <ScalarProperty Name="Spanien_Marocko" ColumnName="Spanien-Marocko" />
+                <ScalarProperty Name="Danmark_Frankrike" ColumnName="Danmark-Frankrike" />
+                <ScalarProperty Name="Australien_Peru" ColumnName="Australien-Peru" />
+                <ScalarProperty Name="Nigeria_Argentina" ColumnName="Nigeria-Argentina" />
+                <ScalarProperty Name="Island_Kroatien" ColumnName="Island-Kroatien" />
+                <ScalarProperty Name="Sydkorea_Tyskland" ColumnName="Sydkorea-Tyskland" />
+                <ScalarProperty Name="Mexiko_Sverige" ColumnName="Mexiko-Sverige" />
+                <ScalarProperty Name="Serbien_Brasilien" ColumnName="Serbien-Brasilien" />
+                <ScalarProperty Name="Schweiz_CostaRica" ColumnName="Schweiz-CostaRica" />
+                <ScalarProperty Name="Japan_Polen" ColumnName="Japan-Polen" />
+                <ScalarProperty Name="Senegal_Colombia" ColumnName="Senegal-Colombia" />
+                <ScalarProperty Name="England_Belgien" ColumnName="England-Belgien" />
+                <ScalarProperty Name="Panama_Tunisien" ColumnName="Panama-Tunisien" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -156,11 +290,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TipsComments">
-            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsComment">
-              <MappingFragment StoreEntitySet="TipsComments">
+          <EntitySetMapping Name="TipsRandomValues">
+            <EntityTypeMapping TypeName="MartinDatabaseModel.TipsRandomValue">
+              <MappingFragment StoreEntitySet="TipsRandomValues">
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

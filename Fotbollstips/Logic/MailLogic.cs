@@ -9,11 +9,12 @@ namespace Fotbollstips.Logic
 {
     public class MailLogic
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MailLogic));
         public MailLogic()
         {
 
         }
-        public bool SendMail(string emailAddress, string blobUrl)
+        public bool SendMail(string emailAddress, string blobUrl, string name)
         {
             try
             {
@@ -23,9 +24,8 @@ namespace Fotbollstips.Logic
                 mail.From = new MailAddress("vmtips2018@gmail.com");
                 mail.To.Add(emailAddress);
                 mail.Subject = "Din VM-Tipsrad";
-                //mail.Body = "This is for testing SMTP mail from GMAIL";
                 mail.IsBodyHtml = true;
-                mail.Body = GetEmailBody(blobUrl);
+                mail.Body = GetEmailBody(blobUrl, name);
 
                 SmtpServer.Port = 587;
                 string password = ConfigurationManager.AppSettings["MailPassword"];
@@ -37,30 +37,24 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                using (var db = new MartinDatabaseEntities())
-                {
-                    TipsError error = new TipsError()
-                    {
-                        Exception = e.ToString(),
-                        InnerException = e.InnerException != null ? e.InnerException.ToString() : "NULL",
-                        EntryDate = DateTime.UtcNow
-                    };
+                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
+                               
+                log.Error(string.Format("Error in SavePDF method, email is: {0}, Inner: {1}.", emailAddress, inner), e);
 
-                    db.TipsErrors.Add(error);
-                    db.SaveChanges();
-                }
                 return false;
             }
             return true;
         }
         
-        private static string GetEmailBody(string blobUrl)
+        private static string GetEmailBody(string blobUrl, string name)
         {
             string body = "";
 
             body += "<h1>Tack för att du deltar i VM-tipset!</h1>";
             body += "<p>På nedanstående länk kan du ladda ner din rad. Glöm inte att betala 50 kr genom ";
-            body += "Swish till telefonnummer xxxx-xxxxxx.</p>";
+            body += "Swish till telefonnummer xxxx-xxxxxx. Ange ";
+            body += string.Format("<strong>{0}</strong>", name);
+            body += " som meddelandetext.</p>";
             body += string.Format("<p>{0}</p>",blobUrl);
             body += "<br/>";
             body += "<p>Med vänlig hälsning</p><p>Tipsadministratören Martin</p>";

@@ -9,28 +9,23 @@
 <div class="jumbotron">
     <h2>Lämna in tipsrad</h2>
 </div>
-<div>
-    <p>
-        Betalning gör du genom Swish till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer
-        det stå vid sidan av ditt namn under fliken Resultat.
-    </p>
-    <p><strong>Raden är alltså inte giltig förrän du betalat!</strong></p>
-    <p>
-        <i>
-            Du kommer få ett mail med en länk där du kan ladda ner din rad, men jag rekommenderar att du om möjligt
-            tar en skärmdump eller skriver ner din rad om något skulle gå fel i programmeringen när du trycker på
-            skicka in. //Tipsadministratören Martin
-        </i>
-    </p>
-</div>
 
 @if (ViewBag.ParticipateResultSuccess != null)
 {
     <div class="alert alert-success" role="alert">@ViewBag.ParticipateResultSuccess</div>
+    <div class="alert alert-warning" role="alert">@ViewBag.ReminderSwish</div>
 }
 else if (ViewBag.ParticipateResultFail != null)
 {
     <div class="alert alert-danger" role="alert">@ViewBag.ParticipateResultFail</div>
+}
+@if (ViewBag.ParticipateEmailSuccess != null)
+{
+    <div class="alert alert-success" role="alert">@ViewBag.ParticipateEmailSuccess</div>
+}
+else if (ViewBag.ParticipateEmailFail != null)
+{
+    <div class="alert alert-danger" role="alert">@ViewBag.ParticipateEmailFail</div>
 }
 
 <div>
@@ -39,116 +34,714 @@ else if (ViewBag.ParticipateResultFail != null)
         <div class="panel panel-info">
             <!-- Default panel contents -->
             <div class="panel-heading">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>För- och efternamn</td>
-                            <td><input type="text" name="myname" /></td>
-                        </tr>
-                        <tr class=".info">
-                            <td>Telefonnummer</td>
-                            <td><input type="text" name="myphonenumber" /></td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td><input type="text" name="myemail" /></td>
-                        </tr>
-                        <tr>
-                            <td>Vill du få email? Skriv "ja" i så fall (utan citattecken). </td>
-                            <td><input type="text" name="getemail" /></td>
-                        </tr>
-                </table>
-                <p>Att välja om man ska få email eller inte kommer tas bort när man ska anmäla sig på riktigt</p>
+                <div>
+                    <p>
+                        Betalning gör du genom Swish till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer
+                        det stå vid sidan av ditt namn under fliken Resultat.
+                    </p>
+                    <p><strong>Raden är alltså inte giltig förrän du betalat!</strong></p>
+                    <p>Andra kommer att se ditt namn men inte telefonnummer eller emailadress.</p>
+                    <p>Du måste inte ange en mailadress om du inte vill. Om du skriver en emailadress kommer ett mail skickas ut 
+                    som innehåller en länk där du kan hämta din inlämnade rad.</p>
+
+                </div>
+
+
             </div>
             <div class="panel-body">
-                @*<table width="50%">*@
+                                <table>
+                    <tr class="no-stripes">
+                        <td class="pw">För- och efternamn</td>
+                        <td class="pw2"><input class="pi" type="text" name="myname" /></td>
+                    </tr>
+                </table>
                 <table>
-                    <tbody>
-                        <tr>
-                            <td>Sverige - Kamerun</td>
-                            <td>
-                                <select size="1" name="svekam1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                - <select size="1" name="svekam2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ryssland - Brasilien</td>
-                            <td>
-                                <select size="1" name="rysbra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                - <select size="1" name="rysbra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Kamerun - Brasilien</td>
-                            <td>
-                                <select size="1" name="kambra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                - <select size="1" name="kambra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sverige - Ryssland</td>
-                            <td>
-                                <select size="1" name="sverys1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                                - <select size="1" name="sverys2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Finallag 1</td>
-                            <td>
-                                <select size="1" name="finalteam1">
-                                    <option value="Sverige" selected="selected">
-                                        Sverige
-                                    </option>
-                                    <option value="Kamerun">
-                                        Kamerun
-                                    </option>
-                                    <option value="Brasilien">
-                                        Brasilien
-                                    </option>
-                                    <option value="Ryssland">
-                                        Ryssland
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Finallag 2</td>
-                            <td>
-                                <select size="1" name="finalteam2">
-                                    <option value="Sverige" selected="selected">
-                                        Sverige
-                                    </option>
-                                    <option value="Kamerun">
-                                        Kamerun
-                                    </option>
-                                    <option value="Brasilien">
-                                        Brasilien
-                                    </option>
-                                    <option value="Ryssland">
-                                        Ryssland
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Vinnare</td>
-                            <td>
-                                <select size="1" name="winner">
-                                    <option value="Sverige" selected="selected">
-                                        Sverige
-                                    </option>
-                                    <option value="Kamerun">
-                                        Kamerun
-                                    </option>
-                                    <option value="Brasilien">
-                                        Brasilien
-                                    </option>
-                                    <option value="Ryssland">
-                                        Ryssland
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
+                    <tr class="no-stripes">
+                        <td class="pw">Telefonnummer</td>
+                        <td class="pw2"><input class="pi" type="text" name="myphonenumber" /></td>
+                    </tr>
+                </table>
+                <table>
+
+                    <tr class="no-stripes">
+                        <td class="pw">Email</td>
+                        <td class="pw2"><input class="pi" type="text" name="myemail" /></td>
+                    </tr>
+                </table>
+                <p class="pm">14 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Ryssland – Saudiarabien</td>
+                        <td>
+                            <select size="1" name="ryssau1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="ryssau2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">15 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Egypten – Uruguay</td>
+                        <td>
+                            <select size="1" name="egyuru1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="egyuru2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Marocko – Iran</td>
+                        <td>
+                            <select size="1" name="marira1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="marira2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Portugal - Spanien</td>
+                        <td>
+                            <select size="1" name="porspa1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="porspa2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">16 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Frankrike – Australien</td>
+                        <td>
+                            <select size="1" name="fraaus1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="fraaus2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Argentina – Island</td>
+                        <td>
+                            <select size="1" name="argisl1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="argisl2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Peru – Danmark</td>
+                        <td>
+                            <select size="1" name="perdan1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="perdan2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Kroatien – Nigeria</td>
+                        <td>
+                            <select size="1" name="kronig1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="kronig2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">17 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Costa Rica – Serbien</td>
+                        <td>
+                            <select size="1" name="cosser1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="cosser2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Tyskland – Mexiko</td>
+                        <td>
+                            <select size="1" name="tysmex1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="tysmex2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Brasilien – Schweiz</td>
+                        <td>
+                            <select size="1" name="brasch1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="brasch2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">18 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Sverige – Sydkorea</td>
+                        <td>
+                            <select size="1" name="svesyd1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="svesyd2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Belgien – Panama</td>
+                        <td>
+                            <select size="1" name="belpan1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="belpan2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Tunisien – England</td>
+                        <td>
+                            <select size="1" name="tuneng1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="tuneng2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">19 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Colombia – Japan</td>
+                        <td>
+                            <select size="1" name="coljap1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="coljap2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Polen – Senegal</td>
+                        <td>
+                            <select size="1" name="polsen1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="polsen2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Ryssland – Egypten</td>
+                        <td>
+                            <select size="1" name="rysegy1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="rysegy2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">20 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Portugal – Marocko</td>
+                        <td>
+                            <select size="1" name="pormar1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="pormar2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Uruguay – Saudiarabien</td>
+                        <td>
+                            <select size="1" name="urusau1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="urusau2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Iran – Spanien</td>
+                        <td>
+                            <select size="1" name="iraspa1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="iraspa2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">21 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Danmark – Australien</td>
+                        <td>
+                            <select size="1" name="danaus1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="danaus2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Frankrike – Peru</td>
+                        <td>
+                            <select size="1" name="fraper1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="fraper2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Argentina – Kroatien</td>
+                        <td>
+                            <select size="1" name="argkro1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="argkro2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">22 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Brasilien – Costa Rica </td>
+                        <td>
+                            <select size="1" name="bracos1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="bracos2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Nigeria – Island</td>
+                        <td>
+                            <select size="1" name="nigisl1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="nigisl2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Serbien – Schweiz</td>
+                        <td>
+                            <select size="1" name="sersch1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="sersch2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">23 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Belgien – Tunisien</td>
+                        <td>
+                            <select size="1" name="beltun1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="beltun2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Sydkorea – Mexiko</td>
+                        <td>
+                            <select size="1" name="sydmex1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="sydmex2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Tyskland – Sverige</td>
+                        <td>
+                            <select size="1" name="tyssve1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="tyssve2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">24 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">England – Panama</td>
+                        <td>
+                            <select size="1" name="engpan1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="engpan2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Japan – Senegal</td>
+                        <td>
+                            <select size="1" name="japsen1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="japsen2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Polen – Colombia</td>
+                        <td>
+                            <select size="1" name="polcol1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="polcol2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">25 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Saudiarabien – Egypten</td>
+                        <td>
+                            <select size="1" name="sauegy1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="sauegy2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Uruguay – Ryssland</td>
+                        <td>
+                            <select size="1" name="ururys1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="ururys2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Iran – Portugal</td>
+                        <td>
+                            <select size="1" name="irapor1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="irapor2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Spanien – Marocko</td>
+                        <td>
+                            <select size="1" name="spamar1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="spamar2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">26 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Danmark – Frankrike</td>
+                        <td>
+                            <select size="1" name="danfra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="danfra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Australien – Peru</td>
+                        <td>
+                            <select size="1" name="ausper1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="ausper2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Nigeria – Argentina</td>
+                        <td>
+                            <select size="1" name="nigarg1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="nigarg2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Island – Kroatien</td>
+                        <td>
+                            <select size="1" name="islkro1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="islkro2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">27 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Sydkorea – Tyskland</td>
+                        <td>
+                            <select size="1" name="sydtys1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="sydtys2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Mexiko – Sverige</td>
+                        <td>
+                            <select size="1" name="mexsve1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="mexsve2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Serbien – Brasilien</td>
+                        <td>
+                            <select size="1" name="serbra1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="serbra2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Schweiz – Costa Rica</td>
+                        <td>
+                            <select size="1" name="schcos1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="schcos2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">28 juni</p>
+                <table>
+                    <tr>
+                        <td class="pw">Japan – Polen</td>
+                        <td>
+                            <select size="1" name="jappol1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="jappol2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Senegal – Colombia</td>
+                        <td>
+                            <select size="1" name="sencol1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="sencol2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">England – Belgien</td>
+                        <td>
+                            <select size="1" name="engbel1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="engbel2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Panama – Tunisien</td>
+                        <td>
+                            <select size="1" name="pantun1"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                            - <select size="1" name="pantun2"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+                        </td>
+                    </tr>
+                </table>
+                <p class="pm">Final</p>
+                <table>
+                    <tr>
+                        <td class="pw">Finallag 1</td>
+                        <td>
+                            <select size="1" name="finalteam1">
+                                <option value="Argentina" selected="selected">
+                                    Argentina
+                                </option>
+                                <option value="Australien">
+                                    Australien
+                                </option>
+                                <option value="Brasilien">
+                                    Brasilien
+                                </option>
+                                <option value="CostaRica">
+                                    Costa Rica
+                                </option>
+                                <option value="Danmark">
+                                    Danmark
+                                </option>
+                                <option value="Egypten">
+                                    Egypten
+                                </option>
+                                <option value="England">
+                                    England
+                                </option>
+                                <option value="Frankrike">
+                                    Frankrike
+                                </option>
+                                <option value="Iran">
+                                    Iran
+                                </option>
+                                <option value="Island">
+                                    Island
+                                </option>
+                                <option value="Japan">
+                                    Japan
+                                </option>
+                                <option value="Kroatien">
+                                    Kroatien
+                                </option>
+                                <option value="Marocko">
+                                    Marocko
+                                </option>
+                                <option value="Mexiko">
+                                    Mexiko
+                                </option>
+                                <option value="Nigeria">
+                                    Nigeria
+                                </option>
+                                <option value="Panama">
+                                    Panama
+                                </option>
+                                <option value="Peru">
+                                    Peru
+                                </option>
+                                <option value="Polen">
+                                    Polen
+                                </option>
+                                <option value="Portugal">
+                                    Portugal
+                                </option>
+                                <option value="Ryssland">
+                                    Ryssland
+                                </option>
+                                <option value="Saudiarabien">
+                                    Saudiarabien
+                                </option>
+                                <option value="Schweiz">
+                                    Schweiz
+                                </option>
+                                <option value="Senegal">
+                                    Senegal
+                                </option>
+                                <option value="Serbien">
+                                    Serbien
+                                </option>
+                                <option value="Spanien">
+                                    Spanien
+                                </option>
+                                <option value="Sverige">
+                                    Sverige
+                                </option>
+                                <option value="Sydkorea">
+                                    Sydkorea
+                                </option>
+                                <option value="Tunisien">
+                                    Tunisien
+                                </option>
+                                <option value="Tyskland">
+                                    Tyskland
+                                </option>
+                                <option value="Uruguay">
+                                    Uruguay
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Finallag 2</td>
+                        <td>
+                            <select size="1" name="finalteam2">
+                                <option value="Argentina" selected="selected">
+                                    Argentina
+                                </option>
+                                <option value="Australien">
+                                    Australien
+                                </option>
+                                <option value="Brasilien">
+                                    Brasilien
+                                </option>
+                                <option value="CostaRica">
+                                    Costa Rica
+                                </option>
+                                <option value="Danmark">
+                                    Danmark
+                                </option>
+                                <option value="Egypten">
+                                    Egypten
+                                </option>
+                                <option value="England">
+                                    England
+                                </option>
+                                <option value="Frankrike">
+                                    Frankrike
+                                </option>
+                                <option value="Iran">
+                                    Iran
+                                </option>
+                                <option value="Island">
+                                    Island
+                                </option>
+                                <option value="Japan">
+                                    Japan
+                                </option>
+                                <option value="Kroatien">
+                                    Kroatien
+                                </option>
+                                <option value="Marocko">
+                                    Marocko
+                                </option>
+                                <option value="Mexiko">
+                                    Mexiko
+                                </option>
+                                <option value="Nigeria">
+                                    Nigeria
+                                </option>
+                                <option value="Panama">
+                                    Panama
+                                </option>
+                                <option value="Peru">
+                                    Peru
+                                </option>
+                                <option value="Polen">
+                                    Polen
+                                </option>
+                                <option value="Portugal">
+                                    Portugal
+                                </option>
+                                <option value="Ryssland">
+                                    Ryssland
+                                </option>
+                                <option value="Saudiarabien">
+                                    Saudiarabien
+                                </option>
+                                <option value="Schweiz">
+                                    Schweiz
+                                </option>
+                                <option value="Senegal">
+                                    Senegal
+                                </option>
+                                <option value="Serbien">
+                                    Serbien
+                                </option>
+                                <option value="Spanien">
+                                    Spanien
+                                </option>
+                                <option value="Sverige">
+                                    Sverige
+                                </option>
+                                <option value="Sydkorea">
+                                    Sydkorea
+                                </option>
+                                <option value="Tunisien">
+                                    Tunisien
+                                </option>
+                                <option value="Tyskland">
+                                    Tyskland
+                                </option>
+                                <option value="Uruguay">
+                                    Uruguay
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pw">Vinnare</td>
+                        <td>
+                            <select size="1" name="winner">
+                                <option value="Argentina" selected="selected">
+                                    Argentina
+                                </option>
+                                <option value="Australien">
+                                    Australien
+                                </option>
+                                <option value="Brasilien">
+                                    Brasilien
+                                </option>
+                                <option value="CostaRica">
+                                    Costa Rica
+                                </option>
+                                <option value="Danmark">
+                                    Danmark
+                                </option>
+                                <option value="Egypten">
+                                    Egypten
+                                </option>
+                                <option value="England">
+                                    England
+                                </option>
+                                <option value="Frankrike">
+                                    Frankrike
+                                </option>
+                                <option value="Iran">
+                                    Iran
+                                </option>
+                                <option value="Island">
+                                    Island
+                                </option>
+                                <option value="Japan">
+                                    Japan
+                                </option>
+                                <option value="Kroatien">
+                                    Kroatien
+                                </option>
+                                <option value="Marocko">
+                                    Marocko
+                                </option>
+                                <option value="Mexiko">
+                                    Mexiko
+                                </option>
+                                <option value="Nigeria">
+                                    Nigeria
+                                </option>
+                                <option value="Panama">
+                                    Panama
+                                </option>
+                                <option value="Peru">
+                                    Peru
+                                </option>
+                                <option value="Polen">
+                                    Polen
+                                </option>
+                                <option value="Portugal">
+                                    Portugal
+                                </option>
+                                <option value="Ryssland">
+                                    Ryssland
+                                </option>
+                                <option value="Saudiarabien">
+                                    Saudiarabien
+                                </option>
+                                <option value="Schweiz">
+                                    Schweiz
+                                </option>
+                                <option value="Senegal">
+                                    Senegal
+                                </option>
+                                <option value="Serbien">
+                                    Serbien
+                                </option>
+                                <option value="Spanien">
+                                    Spanien
+                                </option>
+                                <option value="Sverige">
+                                    Sverige
+                                </option>
+                                <option value="Sydkorea">
+                                    Sydkorea
+                                </option>
+                                <option value="Tunisien">
+                                    Tunisien
+                                </option>
+                                <option value="Tyskland">
+                                    Tyskland
+                                </option>
+                                <option value="Uruguay">
+                                    Uruguay
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -157,78 +750,4 @@ else if (ViewBag.ParticipateResultFail != null)
         </div>
     }
 </div>
-
-
-@*<tr>
-        <td>Sverige - Kamerun</td>
-        <td>
-            <select size="1" name="svekam1">
-                <option value="0" selected="selected">
-                    0
-                </option>
-                <option value="1">
-                    1
-                </option>
-                <option value="2">
-                    2
-                </option>
-                <option value="3">
-                    3
-                </option>
-                <option value="4">
-                    4
-                </option>
-                <option value="5">
-                    5
-                </option>
-                <option value="6">
-                    6
-                </option>
-                <option value="7">
-                    7
-                </option>
-                <option value="8">
-                    8
-                </option>
-                <option value="9">
-                    9
-                </option>
-            </select>
-            -
-            <select size="1" name="svekam2">
-                <option value="0" selected="selected">
-                    0
-                </option>
-                <option value="1">
-                    1
-                </option>
-                <option value="2">
-                    2
-                </option>
-                <option value="3">
-                    3
-                </option>
-                <option value="4">
-                    4
-                </option>
-                <option value="5">
-                    5
-                </option>
-                <option value="6">
-                    6
-                </option>
-                <option value="7">
-                    7
-                </option>
-                <option value="8">
-                    8
-                </option>
-                <option value="9">
-                    9
-                </option>
-            </select>
-        </td>
-    </tr>*@
-
-
 

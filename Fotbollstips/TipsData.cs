@@ -23,10 +23,54 @@ namespace Fotbollstips
         public string Finallag1 { get; set; }
         public string Finallag2 { get; set; }
         public string Vinnare { get; set; }
-        public string Sverige_Kamerun { get; set; }
-        public string Ryssland_Brasilien { get; set; }
-        public string Kamerun_Brasilien { get; set; }
-        public string Sverige_Ryssland { get; set; }
+        public string Ryssland_Saudiarabien { get; set; }
+        public string Egypten_Uruguay { get; set; }
+        public string Marocko_Iran { get; set; }
+        public string Portugal_Spanien { get; set; }
+        public string Frankrike_Australien { get; set; }
+        public string Argentina_Island { get; set; }
+        public string Peru_Danmark { get; set; }
+        public string Kroatien_Nigeria { get; set; }
+        public string CostaRica_Serbien { get; set; }
+        public string Tyskland_Mexico { get; set; }
+        public string Brasilien_Schweiz { get; set; }
+        public string Sverige_Sydkorea { get; set; }
+        public string Belgien_Panama { get; set; }
+        public string Tunisien_England { get; set; }
+        public string Colombia_Japan { get; set; }
+        public string Polen_Senegal { get; set; }
+        public string Ryssland_Egypten { get; set; }
+        public string Portugal_Marocko { get; set; }
+        public string Uruguay_Saudiarabien { get; set; }
+        public string Iran_Spanien { get; set; }
+        public string Danmark_Australien { get; set; }
+        public string Frankrike_Peru { get; set; }
+        public string Argentina_Kroatien { get; set; }
+        public string Brasilien_CostaRica { get; set; }
+        public string Nigeria_Island { get; set; }
+        public string Serbien_Schweiz { get; set; }
+        public string Belgien_Tunisien { get; set; }
+        public string Sydkorea_Mexiko { get; set; }
+        public string Tyskland_Sverige { get; set; }
+        public string England_Panama { get; set; }
+        public string Japan_Senegal { get; set; }
+        public string Polen_Colombia { get; set; }
+        public string Saudiarabien_Egypten { get; set; }
+        public string Uruguay_Ryssland { get; set; }
+        public string Iran_Portugal { get; set; }
+        public string Spanien_Marocko { get; set; }
+        public string Danmark_Frankrike { get; set; }
+        public string Australien_Peru { get; set; }
+        public string Nigeria_Argentina { get; set; }
+        public string Island_Kroatien { get; set; }
+        public string Sydkorea_Tyskland { get; set; }
+        public string Mexiko_Sverige { get; set; }
+        public string Serbien_Brasilien { get; set; }
+        public string Schweiz_CostaRica { get; set; }
+        public string Japan_Polen { get; set; }
+        public string Senegal_Colombia { get; set; }
+        public string England_Belgien { get; set; }
+        public string Panama_Tunisien { get; set; }
         public Nullable<System.DateTime> EntryDate { get; set; }
     }
 }

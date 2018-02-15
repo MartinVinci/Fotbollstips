@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7b6e76f8c6d24fe88c69ef3a79a2c3c9" Name="Diagram1">
-        <EntityTypeShape EntityType="MartinDatabaseModel.TipsData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MartinDatabaseModel.TipsError" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MartinDatabaseModel.TipsPathToPDF" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MartinDatabaseModel.TipsComment" Width="1.5" PointX="5.375" PointY="0.75" />
+      <Diagram DiagramId="e93603c2b1db40aeade90f102cf734c3" Name="Diagram1">
+        <EntityTypeShape EntityType="MartinDatabaseModel.TipsComment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinDatabaseModel.TipsData" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinDatabaseModel.TipsPathToPDF" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MartinDatabaseModel.TipsRandomValue" Width="1.5" PointX="5.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -58,3 +58,25 @@ table, th, td, tr {
 #green{
     color: limegreen !important;
 }
+
+.pw {
+    width: 170px;
+}
+
+.pw2 {
+    width: 250px;
+}
+
+.pm {
+    margin-top: 25px;
+}
+
+.pi {
+    width: 100%;
+}
+
+.no-stripes{
+    margin: 100px;
+    border-style: none;
+    color: black;
+}

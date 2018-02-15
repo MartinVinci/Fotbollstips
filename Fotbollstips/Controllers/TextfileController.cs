@@ -7,13 +7,13 @@ using System.Web.Mvc;
 
 namespace Fotbollstips.Controllers
 {
-    public class ErrorsController : Controller
+    public class TextfileController : Controller
     {
+        // GET: Textfile
         public ActionResult Index()
         {
-            //List<TipsError> errors = DataLogic.GetErrors();
+            ViewBag.Result = BusinessLogic.GetFileFromFileStorage();
 
-            //return View(errors.ToList());
             return View();
         }
     }

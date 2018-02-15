@@ -1,6 +1,8 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.File;
+using Microsoft.Azure;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -13,11 +15,13 @@ namespace Fotbollstips.Logic
 {
     public class BlobStorageLogic
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(BlobStorageLogic));
+
         public BlobStorageLogic()
         {
 
         }
-        
+
         public string SavePDF(PdfDocument document, string name)
         {
             string accountName = "storagemartin";
@@ -30,13 +34,13 @@ namespace Fotbollstips.Logic
 
                 CloudBlobClient client = account.CreateCloudBlobClient();
 
-                CloudBlobContainer sampleContainer = client.GetContainerReference("rows3");
+                CloudBlobContainer sampleContainer = client.GetContainerReference("tips");
                 sampleContainer.CreateIfNotExists();
 
+                name = NameWithoutSpace(name);
                 string fileName = string.Format("{0}_{1}.pdf", name, Guid.NewGuid());
                 CloudBlockBlob blob = sampleContainer.GetBlockBlobReference(fileName);
 
-                //var document = CreateDocument();
                 using (MemoryStream myStream = new MemoryStream())
                 {
                     document.Save(myStream, false);
@@ -48,18 +52,10 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                using (var db = new MartinDatabaseEntities())
-                {
-                    TipsError error = new TipsError()
-                    {
-                        Exception = e.ToString(),
-                        InnerException = e.InnerException != null ? e.InnerException.ToString() : "NULL",
-                        EntryDate = DateTime.UtcNow
-                    };
+                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
 
-                    db.TipsErrors.Add(error);
-                    db.SaveChanges();
-                }
+                log.Error(string.Format("Error in SavePDF method, Inner: {0}.", inner), e);
+
                 return "Något gick fel";
             }
         }
@@ -67,6 +63,58 @@ namespace Fotbollstips.Logic
         private string NameWithoutSpace(string name)
         {
             return name.Replace(' ', '_');
+        }
+
+        public string GetFileFromFileStorage()
+        {
+            try
+            {
+                string returnString = "No data retreived";
+                string accountName = "storagemartin";
+                string accountKey = ConfigurationManager.AppSettings["BlobPassword"];
+
+                StorageCredentials creds = new StorageCredentials(accountName, accountKey);
+                CloudStorageAccount storageAccount = new CloudStorageAccount(creds, useHttps: true);
+
+                // Create a CloudFileClient object for credentialed access to Azure Files.
+                CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
+
+                // Get a reference to the file share we created previously.
+                CloudFileShare share = fileClient.GetShareReference("tipslogs");
+
+                // Ensure that the share exists.
+                if (share.Exists())
+                {
+                    // Get a reference to the root directory for the share.
+                    CloudFileDirectory rootDir = share.GetRootDirectoryReference();
+
+                    // Get a reference to the directory we created previously.
+                    CloudFileDirectory sampleDir = rootDir.GetDirectoryReference("thetipslogs");
+
+                    // Ensure that the directory exists.
+                    if (sampleDir.Exists())
+                    {
+                        // Get a reference to the file we created previously.
+                        CloudFile file = sampleDir.GetFileReference("tipslog.txt");
+
+                        // Ensure that the file exists.
+                        if (file.Exists())
+                        {
+                            // Write the contents of the file to the console window.
+                            returnString = file.DownloadTextAsync().Result;
+                            return returnString;
+                        }
+                    }
+                }
+                return returnString;
+            }
+            catch (Exception e)
+            {
+                string inner = e.InnerException != null ? e.InnerException.ToString() : "NULL";
+                return string.Format("Error in method GetFileFromFileStorage. Exception: {0}. Inner: {1}", e.Message.ToString(), inner);
+            }
+
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Fotbollstips.Logic;
+using Fotbollstips.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +19,22 @@ namespace Fotbollstips.Controllers
                  where hits.HasPayed == false
                  select hits).ToList();
 
-            return View(tipsDataWithPaymentFalse.ToList());
+            string latestUpdate = BusinessLogic.GetRandomValue("PayedLatestUpdate");
+
+            PaymentObject paymentObject = new PaymentObject(tipsDataWithPaymentFalse, latestUpdate);
+
+            //return View(tipsDataWithPaymentFalse.ToList());
+            return View(paymentObject);
         }
 
         [HttpPost]
-        public ActionResult Index(List<TipsData> model)
+        public ActionResult Index(PaymentObject model)
         {
             List<int> newPayments = new List<int>();
 
-            foreach (TipsData data in model)
+            BusinessLogic.UpdateRandomValue("PayedLatestUpdate", model.LatestDate);
+
+            foreach (TipsData data in model.Tipsdata)
             {
                 if ((bool)data.HasPayed)
                 {
