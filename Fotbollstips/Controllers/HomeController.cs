@@ -1,5 +1,4 @@
 ﻿using Fotbollstips.Logic;
-using log4net;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -12,6 +11,8 @@ namespace Fotbollstips.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(HomeController));
+
         public ActionResult Index()
         {
             // TODO Fixa här
@@ -29,8 +30,11 @@ namespace Fotbollstips.Controllers
                 return View("PreTournament", tipsData);
             }
 
+
             return View(tipsData.ToList());
         }
+
+
 
         public ActionResult About()
         {

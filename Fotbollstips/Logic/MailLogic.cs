@@ -9,6 +9,7 @@ namespace Fotbollstips.Logic
 {
     public class MailLogic
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MailLogic));
         public MailLogic()
         {
 
@@ -36,8 +37,9 @@ namespace Fotbollstips.Logic
             }
             catch (Exception e)
             {
-                string logText = string.Format("Email is: {0}", emailAddress);
-                Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, logText, "SendMail", e);
+                string inner = e.InnerException == null ? "NULL" : e.InnerException.ToString();
+                               
+                log.Error(string.Format("Error in SavePDF method, email is: {0}, Inner: {1}.", emailAddress, inner), e);
 
                 return false;
             }
