@@ -91,17 +91,20 @@ namespace Fotbollstips.Logic
                     if (sampleDir.Exists())
                     {
                         // Get a reference to the file we created previously.
-                        CloudFile file = sampleDir.GetFileReference("tipslog.txt");
+                        CloudFile file = sampleDir.GetFileReference("tipslogError.txt");
 
                         // Ensure that the file exists.
                         if (file.Exists())
                         {
                             // Write the contents of the file to the console window.
                             returnString = file.DownloadTextAsync().Result;
+
+                            returnString = MakeHtmlFriendlyText(returnString);
                             return returnString;
                         }
                     }
                 }
+
                 return returnString;
             }
             catch (Exception e)
@@ -109,8 +112,13 @@ namespace Fotbollstips.Logic
                 string inner = e.InnerException != null ? e.InnerException.ToString() : "NULL";
                 return string.Format("Error in method GetFileFromFileStorage. Exception: {0}. Inner: {1}", e.Message.ToString(), inner);
             }
+        }
 
+        private string MakeHtmlFriendlyText(string returnString)
+        {
+            returnString = returnString.Replace("\r\n", "<br /><br />");
 
+            return returnString;
         }
     }
 }

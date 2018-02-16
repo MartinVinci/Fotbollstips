@@ -5,35 +5,5 @@
 }
 
 <h2>Textfile</h2>
-<p>@ViewBag.Result</p>
-@*<table>
-    <tr>
-        <th>
-            Exception
-        </th>
-        <th>
-            Inner exception
-        </th>
-        <th>
-            EntryDate
-        </th>
 
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @item.Exception
-            </td>
-            <td>
-                @item.InnerException
-            </td>
-            <td>
-                @item.EntryDate.ToString()
-            </td>
-        </tr>
-    }
-
-</table>*@
+<p>@Html.Raw(ViewBag.Result)</p>

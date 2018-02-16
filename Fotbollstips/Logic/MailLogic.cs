@@ -33,10 +33,14 @@ namespace Fotbollstips.Logic
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
+
+                string logText = string.Format("Email sent to: {0}, name: {1}", emailAddress, name);
+
+                Log4NetLogic.Log(Log4NetLogic.LogLevel.INFO, logText, "SendMail");
             }
             catch (Exception e)
             {
-                string logText = string.Format("Email is: {0}", emailAddress);
+                string logText = string.Format("Email is: {0}. Name: {1}.", emailAddress, name);
                 Log4NetLogic.Log(Log4NetLogic.LogLevel.ERROR, logText, "SendMail", e);
 
                 return false;
