@@ -40,7 +40,6 @@ namespace Fotbollstips.Logic
         {
             try
             {
-
                 using (var db = new FotbollsTipsModel())
                 {
                     var result = (from hits in db.TipsRandomValues

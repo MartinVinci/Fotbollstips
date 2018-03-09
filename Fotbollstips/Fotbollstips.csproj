@@ -240,7 +240,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logic\BlobStorageLogic.cs" />
+    <Compile Include="Logic\StorageLogic.cs" />
     <Compile Include="Logic\BusinessLogic.cs" />
     <Compile Include="Logic\DataLogic.cs" />
     <Compile Include="Logic\Log4NetLogic.cs" />

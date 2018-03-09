@@ -105,6 +105,8 @@ namespace Fotbollstips.Logic
 
                 bool emailSent = false;
 
+                var storageWorker = new StorageLogic();
+
                 if (saveResultOfTipsData.SuccessedSave)
                 {
                     // Create PDF
@@ -124,8 +126,8 @@ namespace Fotbollstips.Logic
                     if (pdfDocument != null)
                     {
                         // Store in blob storage
-                        var blobWorker = new BlobStorageLogic();
-                        string imagePath = blobWorker.SavePDF(pdfDocument, newTipsData.Namn);
+
+                        string imagePath = storageWorker.SavePDF(pdfDocument, newTipsData.Namn);
 
                         // Save file path to PDF
                         TipsPathToPDF pathToPdf = new TipsPathToPDF()
@@ -146,7 +148,19 @@ namespace Fotbollstips.Logic
                         emailSent = mailWorker.SendMail(newTipsData.Email, pathToPdf.PathToPDF, col["myname"]);
                         //}
                     }
+
                 }
+
+                var sendSms = GetRandomValue("SendSms");
+                if (sendSms == "1")
+                {
+                    string message = string.Format("{0} har lämnat en tipsrad. Mail skickat: {1}. Mailadress: {2}.", col["myname"], emailSent, col["myemail"]);
+
+                    storageWorker.SendSms(message);
+                }
+
+                //return new ParticipateResult(true, emailSent, newTipsData.Email);
+
                 return new ParticipateResult(saveResultOfTipsData.SuccessedSave, emailSent, newTipsData.Email);
             }
             catch (Exception e)
@@ -191,9 +205,8 @@ namespace Fotbollstips.Logic
 
         public static string GetFileFromFileStorage()
         {
-            var blobWorker = new BlobStorageLogic();
+            var blobWorker = new StorageLogic();
             return blobWorker.GetFileFromFileStorage();
         }
-
     }
 }

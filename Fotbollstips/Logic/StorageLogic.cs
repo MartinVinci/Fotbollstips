@@ -10,25 +10,23 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace Fotbollstips.Logic
 {
-    public class BlobStorageLogic
+    public class StorageLogic
     {
-        public BlobStorageLogic()
+        public StorageLogic()
         {
 
         }
 
         public string SavePDF(PdfDocument document, string name)
         {
-            string accountName = "storagemartin";
-            string accountKey = ConfigurationManager.AppSettings["BlobPassword"];
             //string accountKey = "NADhxvTU40qlYify/eTZR+li4xkIaIUsbx8Kgz+SKUEoXmiVomKVIVvCTQjCSd+xyVNLy5x44e8nu44kl6FO7w==";
             try
             {
-                StorageCredentials creds = new StorageCredentials(accountName, accountKey);
-                CloudStorageAccount account = new CloudStorageAccount(creds, useHttps: true);
+                CloudStorageAccount account = GetStorageAccount();
 
                 CloudBlobClient client = account.CreateCloudBlobClient();
 
@@ -56,6 +54,16 @@ namespace Fotbollstips.Logic
             }
         }
 
+        private CloudStorageAccount GetStorageAccount()
+        {
+            string accountName = "storagemartin";
+            string accountKey = ConfigurationManager.AppSettings["BlobPassword"];
+
+            StorageCredentials creds = new StorageCredentials(accountName, accountKey);
+
+            return new CloudStorageAccount(creds, useHttps: true);
+        }
+
         private string NameWithoutSpace(string name)
         {
             return name.Replace(' ', '_');
@@ -65,7 +73,7 @@ namespace Fotbollstips.Logic
         {
             try
             {
-                string returnString = "No data retreived";
+                string returnString = "No data retreived.";
                 string accountName = "storagemartin";
                 string accountKey = ConfigurationManager.AppSettings["BlobPassword"];
 
@@ -114,11 +122,27 @@ namespace Fotbollstips.Logic
             }
         }
 
+        public void SendSms(string message)
+        {
+            CloudStorageAccount account = GetStorageAccount();
+
+            CloudQueueClient queueClient = account.CreateCloudQueueClient();
+
+            CloudQueue queue = queueClient.GetQueueReference("fotbollstips");
+
+            //queue.CreateIfNotExists();
+
+            // Create a message and add it to the queue.
+            CloudQueueMessage queueMessage = new CloudQueueMessage(message);
+            queue.AddMessage(queueMessage);
+        }
+
         private string MakeHtmlFriendlyText(string returnString)
         {
             returnString = returnString.Replace("\r\n", "<br /><br />");
 
             return returnString;
         }
+
     }
 }

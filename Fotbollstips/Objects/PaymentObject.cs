@@ -9,11 +9,13 @@ namespace Fotbollstips.Objects
     {
         public List<TipsData> Tipsdata { get; set; }
         public string LatestDate { get; set; }
+        public string SendSms { get; set; }
 
-        public PaymentObject(List<TipsData> tipsdata, string latestdate)
+        public PaymentObject(List<TipsData> tipsdata, string latestdate, string sendSms)
         {
             Tipsdata = tipsdata;
             LatestDate = latestdate;
+            SendSms = sendSms;
         }
         public PaymentObject()
         {

@@ -20,8 +20,9 @@ namespace Fotbollstips.Controllers
                  select hits).ToList();
 
             string latestUpdate = BusinessLogic.GetRandomValue("PayedLatestUpdate");
+            string sendSms = BusinessLogic.GetRandomValue("SendSms");
 
-            PaymentObject paymentObject = new PaymentObject(tipsDataWithPaymentFalse, latestUpdate);
+            PaymentObject paymentObject = new PaymentObject(tipsDataWithPaymentFalse, latestUpdate, sendSms);
 
             //return View(tipsDataWithPaymentFalse.ToList());
             return View(paymentObject);
@@ -33,6 +34,7 @@ namespace Fotbollstips.Controllers
             List<int> newPayments = new List<int>();
 
             BusinessLogic.UpdateRandomValue("PayedLatestUpdate", model.LatestDate);
+            BusinessLogic.UpdateRandomValue("SendSms", model.SendSms);
 
             foreach (TipsData data in model.Tipsdata)
             {
