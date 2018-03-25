@@ -31,22 +31,32 @@ else if (ViewBag.ParticipateEmailFail != null)
 <div>
     @using (Html.BeginForm("Participate", "Home", FormMethod.Post))
     {
-        <div class="panel panel-info">
+        <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">
                 <div>
                     <p>
-                        Betalning gör du genom Swish till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer
-                        det stå vid sidan av ditt namn under fliken Resultat.
+                        Tippa resultat för samtliga gruppspelsmatcher, gissa de två finallagen samt vinnaren av finalen.
+                        Ett poäng per rätt resultat ger 51 poäng som max. (48 matcher, 2 finallag och 1 vinnare.) Den/de
+                        som får flest rätt tar hem hela prissumman, inga pengar till tvåorna.
                     </p>
-                    <p><strong>Raden är alltså inte giltig förrän du betalat!</strong></p>
-                    <p>Andra kommer att se ditt namn men inte telefonnummer eller emailadress.</p>
-                    <p>Du måste inte ange en mailadress om du inte vill. Om du skriver en emailadress kommer ett mail skickas ut 
-                    som innehåller en länk där du kan hämta din inlämnade rad.</p>
-
+                    <p>
+                        Det kostar 50 kr att vara med. Raden lämnas in genom denna webbsida, betala via Swish
+                        till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer
+                        det stå vid sidan av ditt namn under fliken Resultat. <strong>Raden är alltså inte giltig förrän du betalat!</strong>
+                        Andra kommer att se ditt namn men inte telefonnummer eller mailadress. 
+                        Du måste inte ange en mailadress om du inte vill. Om du skriver en emailadress kommer ett mail skickas ut
+                        som innehåller en länk där du kan hämta din inlämnade rad.
+                    </p>
+                    <p>
+                        Raden kan också lämnas in i pappersform på någon av restaurangerna.
+                        De inlämnade raderna i pappersform kommer skrivas in och synas på denna sida.
+                    </p>
+                    <p>
+                        Har du några frågor så gå in under fliken "Ge en kommentar" eller skicka ett mail direkt
+                        till vmtips2018@gmail.com.
+                    </p>
                 </div>
-
-
             </div>
             <div class="panel-body">
                                 <table>

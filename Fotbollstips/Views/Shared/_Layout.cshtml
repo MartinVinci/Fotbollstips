@@ -17,18 +17,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("VM Tips", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Resultat", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Resultat", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Om VM-tipset", "About", "Home")</li>
                     <li>@Html.ActionLink("Lämna in rad", "Participate", "Home")</li>
                     <li>@Html.ActionLink("Ge en kommentar", "Comment", "Home")</li>
-
-                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
-                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>
