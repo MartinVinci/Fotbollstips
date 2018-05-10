@@ -21,7 +21,7 @@ namespace Fotbollstips.Controllers
 
             ViewBag.LatestDate = BusinessLogic.GetRandomValue("PayedLatestUpdate");
 
-            if (tournamentStart < DateTime.Now)
+            if (tournamentStart > DateTime.Now)
             {
                 tipsData = BusinessLogic.RemoveSensitiveData(tipsData);
                 tipsData = tipsData.OrderBy(o => o.Namn).ToList();
@@ -70,7 +70,6 @@ namespace Fotbollstips.Controllers
             }
             else
             {
-
                 var saveResult = BusinessLogic.ParticipateInTips(col);
 
                 if (saveResult.SavedInDatabase)

@@ -38,7 +38,7 @@ namespace Fotbollstips.Logic
             {
                 TipsData newTipsData = new TipsData()
                 {
-                    EntryDate = DateTime.UtcNow,
+                    EntryDate = DateTime.Now,
                     Poäng = 0,
                     HasPayed = false,
 
@@ -126,7 +126,6 @@ namespace Fotbollstips.Logic
                     if (pdfDocument != null)
                     {
                         // Store in blob storage
-
                         string imagePath = storageWorker.SavePDF(pdfDocument, newTipsData.Namn);
 
                         // Save file path to PDF
@@ -148,7 +147,6 @@ namespace Fotbollstips.Logic
                         emailSent = mailWorker.SendMail(newTipsData.Email, pathToPdf.PathToPDF, col["myname"]);
                         //}
                     }
-
                 }
 
                 var sendSms = GetRandomValue("SendSms");

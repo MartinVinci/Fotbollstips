@@ -474,7 +474,7 @@ namespace Fotbollstips.Logic
                 {
                     Name = model.Name,
                     Comment = model.Comment,
-                    EntryDate = DateTime.UtcNow
+                    EntryDate = DateTime.Now
                 };
 
                 db.TipsComments.Add(comment);
@@ -546,7 +546,6 @@ namespace Fotbollstips.Logic
             try
             {
                 SaveTipsDataToLogFile(tipsData);
-
             }
             catch (Exception)
             {
@@ -559,7 +558,6 @@ namespace Fotbollstips.Logic
                 {
                     db.TipsDatas.Add(tipsData);
                     db.SaveChanges();
-
 
                     return new SavedTipsDataResult()
                     {

@@ -44,7 +44,7 @@ else if (ViewBag.ParticipateEmailFail != null)
                         Det kostar 50 kr att vara med. Raden lämnas in genom denna webbsida, betala via Swish
                         till telefonnummer xxxx-xxxxxx. När betalningen är registrerad kommer
                         det stå vid sidan av ditt namn under fliken Resultat. <strong>Raden är alltså inte giltig förrän du betalat!</strong>
-                        Andra kommer att se ditt namn men inte telefonnummer eller mailadress. 
+                        Andra kommer att se ditt namn men inte telefonnummer eller mailadress.
                         Du måste inte ange en mailadress om du inte vill. Om du skriver en emailadress kommer ett mail skickas ut
                         som innehåller en länk där du kan hämta din inlämnade rad.
                     </p>
@@ -59,7 +59,7 @@ else if (ViewBag.ParticipateEmailFail != null)
                 </div>
             </div>
             <div class="panel-body">
-                                <table>
+                <table>
                     <tr class="no-stripes">
                         <td class="pw">För- och efternamn</td>
                         <td class="pw2"><input class="pi" type="text" name="myname" /></td>
@@ -760,4 +760,9 @@ else if (ViewBag.ParticipateEmailFail != null)
         </div>
     }
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $('form').submit(function () {
+        $('input.btn-warning').prop("disabled", "disabled");
+    })
+</script>
