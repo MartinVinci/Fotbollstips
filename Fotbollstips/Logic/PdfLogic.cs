@@ -93,10 +93,10 @@ namespace Fotbollstips.Logic
             yCoord = DrawTheString("Australien - Peru", tipsData.Australien_Peru, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
             yCoord = DrawTheString("Nigeria - Argentina", tipsData.Nigeria_Argentina, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
             yCoord = DrawTheString("Island - Kroatien", tipsData.Island_Kroatien, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
-            yCoord = DrawTheString("Sydkorea - Tyskland", tipsData.Sverige_Sydkorea, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
+            yCoord = DrawTheString("Sydkorea - Tyskland", tipsData.Sydkorea_Tyskland, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
             yCoord = DrawTheString("Mexiko - Sverige", tipsData.Mexiko_Sverige, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
             yCoord = DrawTheString("Serbien - Brasilien", tipsData.Serbien_Brasilien, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
-            yCoord = DrawTheString("Schweiz - Costa Rica", tipsData.Serbien_Schweiz, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
+            yCoord = DrawTheString("Schweiz - Costa Rica", tipsData.Schweiz_CostaRica, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
             yCoord = DrawTheString("Japan - Polen", tipsData.Japan_Polen, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
             yCoord = DrawTheString("Senegal - Colombia", tipsData.Senegal_Colombia, yCoord, xCoordGame, xCoordResult, graph, fontMedium);
             yCoord = DrawTheString("England - Belgien", tipsData.England_Belgien, yCoord, xCoordGame, xCoordResult, graph, fontMedium);

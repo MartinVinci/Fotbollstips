@@ -12,7 +12,7 @@
     </p>
     <p>
         Det kostar 50 kr att vara med. Raden lämnas in genom denna webbsida, betala via Swish
-        till telefonnummer xxxx-xxxxxx. Raden kan också lämnas in i pappersform på någon av restaurangerna.
+        till telefonnummer 0709-632067. Raden kan också lämnas in i pappersform på någon av restaurangerna.
         De inlämnade raderna i pappersform kommer skrivas in och synas på denna sida.
     </p>
     <p>
@@ -20,3 +20,98 @@
         till vmtips2018@gmail.com.
     </p>
 </div>
+
+
+
+NEDAN ÄR DET SOM SKA VAR UNDER HOME/INDEX
+
+
+<br /><br />
+<h1 style="color: red">Nedan är det som kommer visas innan VM börjar, så man inte kan titta vad andra tippat</h1>
+<br /><br />
+
+<div class="jumbotron">
+    <p>
+        Följande personer har lämnat in rader för VM-tipset, förutom de som lämnat in en kopia på restaurangerna.
+        Din rad är inte giltig förrän du betalat in 50 kronor via Swish till telefonnummer 0709-632067.
+    </p>
+    <p>
+        <strong>Viktigt: </strong>I meddelandet i Swish så skriv namnet precis som det står nedan.
+    </p>
+    <p>
+        Har du några frågor så
+        gå in under fliken "Ge en kommentar" eller skicka ett mail direkt till vmtips2018@gmail.com.
+    </p>
+    <p>
+        <strong>Jag (tipsadministratören Martin Nordkvist) uppdaterar denna information manuellt vid tillfälle</strong> (Det innebär
+        alltså att du kan ha betalat men att jag inte uppdaterat denna sidan än)
+    </p>
+
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>
+                Namn
+            </th>
+            <th>
+                Betalat
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Namn == "Rätt svar")
+            {
+                continue;
+            }
+
+            <tr>
+                <td>
+                    @item.Namn
+                </td>
+                @if ((bool)item.HasPayed)
+                {
+                    <td>
+                        Ja
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Nej
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+
+
+
+@*<div class="row">
+        <div class="col-md-4">
+            <h2>Getting started Robin</h2>
+            <p>@ViewBag.Hej</p>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@
