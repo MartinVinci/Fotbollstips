@@ -14,6 +14,7 @@ namespace Fotbollstips.Controllers
     {
         public ActionResult Index()
         {
+            // TODO Fixa här
             var tournamentStart = Convert.ToDateTime(ConfigurationManager.AppSettings["TournamentStartTime"]);
 
             List<TipsData> tipsData = BusinessLogic.GetDataForPresentation();

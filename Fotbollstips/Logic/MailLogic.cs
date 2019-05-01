@@ -47,19 +47,19 @@ namespace Fotbollstips.Logic
             }
             return true;
         }
-
+        
         private static string GetEmailBody(string blobUrl, string name)
         {
             string body = "";
 
             body += "<h1>Tack för att du deltar i VM-tipset!</h1>";
             body += "<p>På nedanstående länk kan du ladda ner din rad. Glöm inte att betala 50 kr genom ";
-            body += "Swish till telefonnummer 0709-632067. Ange ";
+            body += "Swish till telefonnummer xxxx-xxxxxx. Ange ";
             body += string.Format("<strong>{0}</strong>", name);
             body += " som meddelandetext.</p>";
-            body += string.Format("<a href=\"{0}\">{1}</a>", blobUrl, blobUrl);
+            body += string.Format("<p>{0}</p>",blobUrl);
             body += "<br/>";
-            body += "<p>Med vänlig hälsning</p><p>Tipsadministratören Martin Nordkvist</p>";
+            body += "<p>Med vänlig hälsning</p><p>Tipsadministratören Martin</p>";
             body += string.Format(@"https://vmtips.azurewebsites.net");
 
             return body;

@@ -123,7 +123,6 @@ namespace Fotbollstips.Logic
 
                     //return true;
                     #endregion
-
                     if (pdfDocument != null)
                     {
                         // Store in blob storage
@@ -153,7 +152,7 @@ namespace Fotbollstips.Logic
                 var sendSms = GetRandomValue("SendSms");
                 if (sendSms == "1")
                 {
-                    string message = string.Format("'{0}' har lämnat en tipsrad. Mail skickat: {1}. Mailadress: {2}.", col["myname"], emailSent, col["myemail"]);
+                    string message = string.Format("{0} har lämnat en tipsrad. Mail skickat: {1}. Mailadress: {2}.", col["myname"], emailSent, col["myemail"]);
 
                     storageWorker.SendSms(message);
                 }
