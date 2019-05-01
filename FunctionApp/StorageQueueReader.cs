@@ -24,7 +24,7 @@ namespace FunctionApp
             {
                 // Find your Account Sid and Auth Token at twilio.com/console
                 const string accountSid = "ACe2743f8aa25b5dde4193e977d5f2c1d1";
-                const string authToken = "6927bdb14579c85a5fe72e258f7aed0e";
+                const string authToken = "Masked";
                 TwilioClient.Init(accountSid, authToken);
 
                 var to = new PhoneNumber("+46709632067");
