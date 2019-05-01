@@ -26,7 +26,7 @@ namespace Fotbollstips.Logic
             }
             else if (level == LogLevel.ERROR)
             {
-                logError.Error(textToLog);
+                logError.Info(textToLog);
             }
         }
 
